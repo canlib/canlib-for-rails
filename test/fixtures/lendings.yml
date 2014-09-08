@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  lending_date: 2014-09-08
+  lending_period: 1
+  lending_user_name: MyString
+
+two:
+  lending_date: 2014-09-08
+  lending_period: 1
+  lending_user_name: MyString
