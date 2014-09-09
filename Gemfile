@@ -48,3 +48,4 @@ end
 
 gem 'execjs'
 gem 'therubyracer'
+gem 'factory_girl_rails'
