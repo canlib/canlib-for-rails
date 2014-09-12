@@ -4,12 +4,17 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    dummy1 = {book: {title: "書籍１", author_name: "著者１"}, lending: {lending_date: Date.today, lending_period: 7, lending_user_name: "利用者Ａ"}}
+    @books = Book.all
+		
+		dummy1 = {book: {title: "書籍１", author_name: "著者１"}, lending: {lending_date: Date.today, lending_period: 7, lending_user_name: "利用者Ａ"}}
     dummy2 = {book: {title: "書籍２", author_name: "著者２"}, lending: nil}
-
 		dummy_data = [dummy1, dummy2]		
 
-		render :json => dummy_data
+		respond_to do |format|
+			format.html
+			format.json {render :json => dummy_data}
+		end
+
   end
 
   # GET /books/1
