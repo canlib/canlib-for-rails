@@ -1,0 +1,5 @@
+ja:
+  error:
+    not_found:
+      title: お探しのページは見つかりません
+      description: 一時的にアクセスできない状態か削除されてしまった可能性があります。

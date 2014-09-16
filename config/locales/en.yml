@@ -19,5 +19,11 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: "Hello world"
+en: &en
+  error:
+    not_found:
+      title: "This page cannot be found"
+      description: "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
+
+en-US:
+  <<: *en
