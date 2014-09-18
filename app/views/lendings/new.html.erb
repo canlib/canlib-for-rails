@@ -1,0 +1,22 @@
+<% provide(:title, '貸出処理') %>
+<h1>New lending</h1>
+
+<div class="row">
+	<div class="span6 offset3">
+		<%= form_for(@lending, url: book_lendings_path) do |f| %>
+	  
+			<%= f.label :date %>
+			<%= f.text_field :date %>
+    
+			<%= f.label :period %>
+    	<%= f.text_field :period %>
+		
+			<%= f.label :user_name %>
+			<%= f.text_field :user_name %>
+    
+			<%= f.submit "Create Lending", class: "btn btn-large btn-primary" %>
+		
+		<% end %>
+		<%= link_to 'Back', books_path %>
+	</div>
+</div>
