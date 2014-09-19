@@ -1,4 +1,6 @@
 <% provide(:title, '蔵書一覧') %>
+<p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
 <h1>蔵書一覧</h1>
 
 <table>
@@ -17,8 +19,11 @@
         <td><%= book.author_name %></td>
         <td><%= link_to 'Show', book %></td>
         <td><%= link_to 'Edit', edit_book_path(book) %></td>
-        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', book, method: :delete, data: {confirm: 'Are you sure?'} %></td>
 				<td><%= link_to 'Lending', new_book_lending_path(book) %></td>
+				<% if book.lending.present? %>
+					<td><%= link_to 'Return', book_lending_path(book, book.lending), method: :delete, data: {confirm: 'Are you sure?'} %></td>
+				<% end %>
       </tr>
     <% end %>
   </tbody>
