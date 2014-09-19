@@ -1,5 +1,5 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
-
+=begin
 FactoryGirl.define do
   factory :lending do
     book_id 1
@@ -8,3 +8,4 @@ FactoryGirl.define do
     user_name "MyString"
   end
 end
+=end

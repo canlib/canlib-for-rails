@@ -44,4 +44,26 @@ describe "Lending pages", :type => :request do
 		end
 	end
 
+	describe "destroy" do
+		before do 
+			book2 = FactoryGirl.create(:book)
+			@lending2 = FactoryGirl.create(:lending, book: book2)
+		end
+
+		describe "as correct book" do
+			before {visit root_path}
+
+			it "should delete a lending" do
+				expect {click_link "Return"}.to change(Lending, :count).by(-1)
+			end
+		end
+
+		describe "when the lending already deleted" do
+			before {Lending.find_by(id: @lending2.id).destroy}
+
+			subject {page}
+			it {should_not have_link("Return")}
+		end
+	end
+
 end

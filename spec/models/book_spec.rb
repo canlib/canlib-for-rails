@@ -33,11 +33,13 @@ describe Book, :type => :model do
 	end
 
 	describe "lending associations" do
-		before {@book.save}
+		before do
+			@book.save
+			Lending.create(book_id: @book.id, period: 14, user_name: "a")
+		end
 	
 		it "should destroy associated lendings" do
-			@book.destroy
-			expect(@book.lending).to be_blank
+			expect {@book.destroy}.to change(Lending, :count).by(-1)
 		end
 	end
 
