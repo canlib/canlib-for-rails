@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   resources :books do
 		resources :lendings, only: [:new, :create, :destroy]
 	end
+  resources :lendings, only: [:index]
+
 	root 'books#index'
+	match '/lendings/search', to: 'lendings#search', via: 'get'
+	match '*a', to: 'application#render_error', via: ['get', 'post']
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

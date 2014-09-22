@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby '2.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.5'
@@ -58,3 +58,8 @@ gem 'factory_girl_rails'
 gem 'bootstrap-sass'
 gem 'sprockets'
 gem 'faker'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
+gem 'jquery-turbolinks'
+gem 'jquery-ui-rails'
+gem 'jquery-ui-bootstrap-rails', git: 'git@github.com:seventhsense/jquery-ui-bootstrap-rails.git', branch: 'development'

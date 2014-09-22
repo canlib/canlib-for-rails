@@ -1,0 +1,70 @@
+<% provide(:title, @title) %>
+<div class="Left">
+	<h1><%= @title %></h1>
+
+	<%= form_tag(lendings_search_path, method: "get", id: "search_window", class: "search") do %>
+		<%= text_field_tag :search_string, "", :placeholder => "検索ワードを入力", :class => "text-box", :maxlength => 50 %>
+	  <%= submit_tag "検索", :id => "search_button", :class => "btn", :name => nil %>
+		<%= hidden_field_tag :job, @job %>
+	<% end %>
+
+	<% if @job == "lending" %>
+	<div id="dialog-form" title=<%= @btn_name %>>
+		<p class="validateTips">貸出する利用者名を入力してください。</p>
+		<%= form_tag(book_lendings_path(1), method: "post", id: "lending_book", name: "user_name") do %>
+			<%= text_field_tag 'lending[user_name]', "", :maxlength => 25 %>
+		<% end %>	
+	</div>
+	<button id="lending_book_button" class="btn btn-primary" disabled><%= @btn_name %></button>
+	<% elsif @job == "return" %>
+	<div id="dialog-confirm" title=<%= @btn_name %>>
+		<p>
+			<span class="ui-icon ui-icon-alert"></span>
+			  返却してよろしいですか？	
+			<%= form_tag(book_lending_path(1, 1), method: "delete", id: "return_book", name: "user_name") do %>
+			<% end %>
+		</p>
+	</div>
+	<button id="return_book_button" class="btn btn-primary" disabled><%= @btn_name %></button>
+	<% end %>
+
+
+	<table class="lending-information">
+		<thead>
+			<tr>
+				<% unless @job == "other" %>
+					<th class="selector">書籍の選択</th>
+				<% end %>
+					<th>書籍タイトル</th>
+					<th>著者名</th>
+				<% if @job == "other" %>
+					<th>貸出状況</th>
+				<% end %>
+			</tr>
+		</thead>
+		<tbody>
+			<ul>
+				<% @books.each do |book| %>
+					<tr>
+						<% unless @job == "other" %>
+							<td class="selector"><input type="radio" name="book_select" book_id="<%= book.id %>" lending_id=<%= book.lending.id if book.lending.present? %>  /></td>
+						<% end %>
+						<td><%= book.title %></td>
+						<td><%= book.author_name %></td>
+						<% if @job == "other" && book.lending.present? %>
+							<td class="lending">貸出中</td>
+						<% elsif @job == "other" %>
+							<td class="no-lending">保管中</td>
+						<% end %>
+					</tr>
+				<% end %>
+			</ul>
+		</tbody>
+	</table>
+	</form>
+
+
+	<center><%= will_paginate @books %></center>
+
+
+</div>

@@ -2,13 +2,20 @@
 <html>
 <head>
   <title><%= full_title(yield(:title)) %></title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= csrf_meta_tags %>
+	<%= render 'layouts/shim' %>
 </head>
 <body>
-
-<%= yield %>
-
+  <%= javascript_include_tag 'jquery-2.1.1.min' %>
+  <%= javascript_include_tag 'jquery-ui/1.11.1/jquery-ui.min' %>
+  <%= javascript_include_tag 'application' %>
+	<%= render 'layouts/header' %>
+	<% flash.each do |name, msg| %>
+			<%= content_tag(:div, msg, class: "alert alert-#{name}") %>
+	<% end %>
+	<div class="container">
+		<%= yield %>
+	</div>
 </body>
 </html>
