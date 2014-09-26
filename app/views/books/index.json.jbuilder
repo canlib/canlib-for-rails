@@ -1,4 +1,4 @@
-json.array! @books do |book|
+json.array! Book.all do |book|
 	json.set! :book do
 		json.title book.title
 		json.author_name book.author_name

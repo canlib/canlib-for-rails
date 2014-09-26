@@ -22,8 +22,13 @@
 en: &en
   error:
     not_found:
-      title: "This page cannot be found"
-      description: "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
+      title: This page cannot be found
+      description: The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
+  lending:
+    title:
+      lending: Lending Service
+      return: Return Service
+      other: Books Information
 
 en-US:
   <<: *en

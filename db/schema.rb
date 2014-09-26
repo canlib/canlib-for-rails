@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20140917012844) do
 
   create_table "lendings", force: true do |t|
     t.integer  "book_id"
-    t.date     "date",       default: '2014-09-18'
+    t.date     "date",       default: '2014-09-25'
     t.integer  "period"
     t.string   "user_name"
     t.datetime "created_at"

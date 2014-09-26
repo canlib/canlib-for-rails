@@ -1,7 +1,7 @@
 <% provide(:title, '蔵書一覧') %>
-<p id="notice"><%= notice %></p>
-<p id="alert"><%= alert %></p>
 <h1>蔵書一覧</h1>
+
+<%= will_paginate @books%>
 
 <table>
   <thead>
@@ -29,6 +29,10 @@
   </tbody>
 </table>
 
+<%= will_paginate %>
+
 <br>
 
-<%= link_to 'New Book', new_book_path %>
+<%= link_to 'New Book', new_book_path, target: "_blank" %>
+<br>
+<%= link_to 'Lendings', lendings_path, target: "_blank" %>

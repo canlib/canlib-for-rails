@@ -1,0 +1,158 @@
+/* universal */
+
+html {
+	overflow-y: scroll;
+}
+
+body {
+	padding-top: 70px;
+}
+
+section {
+	overflow: auto;
+}
+
+textarea {
+	resize: vertical;
+}
+
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+	line-height: 1;
+	font-weight: bold;
+}
+
+h1 {
+	font-size: 2em;
+	letter-spacing: -1px;
+	margin-bottom: 20px;
+}
+
+p {
+	font-size: 1.1em;
+	line-height: 1.7em;
+}
+
+
+/* header */
+
+#logo {
+	float: left;
+	margin-right: 10px;
+	font-size: 1.7em;
+	color: white;
+	text-transform: uppercase;
+	letter-spacing: -1px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	font-weight: bold;
+	line-height: 1;
+
+	:hover {
+		color: white;
+		text-decoration: none;
+	}
+}
+
+img {
+	width: 120px;
+}
+
+.navbar-inverse
+.navbar-nav > li > a {
+	color: white;
+	padding-top: 22px;
+}
+
+
+/* search */
+
+input.text-box {
+	width: 170px;
+	height: 25px;
+	margin-top: 10px;
+}
+
+#search_window {
+	float: right;
+}
+
+/* table */
+
+table.lending-information {
+	margin-top: 0px;
+	width: 100%;
+	table-layout: fixed;
+
+	tr {
+		float: left;
+		width: 100%;
+	}
+
+	th, td {
+		width: 500px;
+		padding: 5px;
+	}
+
+	th {
+		border-bottom: 1px solid lightgray;
+	}
+
+	td {
+		border-bottom: 1px dotted lightgray;
+	}
+
+	th.selector {
+		width: 100px;
+	}
+
+	td.selector {
+		width: 100px;
+		text-align: center;
+	}
+
+	td.lending {
+		color: red;
+	}
+
+	td.no-lending {
+		color: green;
+	}
+	
+	tbody{
+		float: left;
+		overflow-x: auto;
+		overflow-y: scroll;
+		height: 500px;
+		width: auto;
+	}
+}
+	
+
+/* button */
+
+.btn-primary {
+	margin-top: 25px;
+	margin-bottom: 10px;
+}
+
+button.ui-button {
+	margin-top: 30px;
+}
+
+
+/* dialog */
+
+span.ui-icon {
+	float: left;
+	margin: 4px 7px 20px 0;
+}
+
+
+/* input */
+
+input[type="text"] {
+	height: 25px;
+}

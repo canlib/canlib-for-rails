@@ -3,3 +3,12 @@ ja:
     not_found:
       title: お探しのページは見つかりません
       description: 一時的にアクセスできない状態か削除されてしまった可能性があります。
+  lending:
+    title:
+      lending: 貸出処理
+      return: 返却処理
+      other: 貸出状況一覧
+    btn_name:
+      lending: 貸出する
+      return: 返却する
+
