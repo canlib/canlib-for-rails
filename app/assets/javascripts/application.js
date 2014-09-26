@@ -36,7 +36,7 @@ $(function() {
 		}
 	}
 
-	$("#dialog-form").dialog({
+	$("#lending-dialog-form").dialog({
 		autoOpen: false,
 		height: 300,
 		width: 350,
@@ -67,25 +67,24 @@ $(function() {
 
 	$("#lending_book_button")
 		.click(function() {
-			$("#dialog-form").dialog("open");
+			$("#lending-dialog-form").dialog("open");
 	});
 
 
 	$("[name=book_select]").change(function() {
 		$("#lending_book_button").removeAttr("disabled");
-		$("#lending_book_button").removeClass("ui-state-disabled");
-		$("#lending_book_button").removeClass("ui-button-disabled");
-		
 		$("#return_book_button").removeAttr("disabled");
-		$("#return_book_button").removeClass("ui-state-disabled");
-		$("#return_book_button").removeClass("ui-button-disabled");
+		$("#delete_book_button").removeAttr("disabled");
+		$("#show_book_button").removeAttr("disabled");
 		
 		$("#lending_book").attr("action", "/books/" + $(this).attr("book_id")  + "/lendings");
 		$("#return_book").attr("action", "/books/" + $(this).attr("book_id") + "/lendings/" + $(this).attr("lending_id"));
+		$("#delete_book").attr("action", "/books/" + $(this).attr("book_id"));
+		$("#show_book").attr("action", "/books/" + $(this).attr("book_id") + "/edit");
 	});
 
 
-	$("#dialog-confirm").dialog({
+	$("#lending-dialog-confirm").dialog({
 		autoOpen: false,
 		height: 300,
 		width: 350,
@@ -104,8 +103,77 @@ $(function() {
 
 	$("#return_book_button")
 		.click(function() {
-			$("#dialog-confirm").dialog("open");
+			$("#lending-dialog-confirm").dialog("open");
 	});
+
+	$("#delete-dialog-confirm").dialog({
+		autoOpen: false,
+		height: 300,
+		width: 350,
+		modal: true,
+		buttons: {
+			"OK": function() {
+				$("#delete_book").submit();
+				$(this).dialog("close");
+			},
+			"キャンセル": function() {
+				$(this).dialog("close");
+			}
+		}
+	});
+
+	$("#delete_book_button")
+		.click(function() {
+			$("#delete-dialog-confirm").dialog("open");
+	});
+
+	$("#add-book-dialog-form").dialog({
+		autoOpen: false,
+		height: 300,
+		width: 350,
+		modal: true,
+		buttons: {
+			"OK": function() {
+				var title = $("#book_title").on("textchange", function() {});
+				var author_name = $("#book_author_name").on("textchange", function() {});
+				var bValid = true;
+
+				allFields.removeClass("ui-state-error");
+
+				bValid = bValid && checkLength(title, "書籍タイトル", 1, 50);
+				bValid = bValid && checkLength(author_name, "著者名", 1, 30);
+
+				if (bValid) {
+					$("#add_book").submit();
+					$(this).dialog("close");
+				}
+			},
+			"キャンセル": function() {
+			allFields.val("").removeClass("ui-state-error");
+				$(this).dialog("close");
+			}
+		},
+		close: function() {
+			allFields.val("").removeClass("ui-state-error");
+		}
+	});
+
+	$("#add_book_button")
+		.click(function() {
+			$("#add-book-dialog-form").dialog("open");
+	});
+
+	clearradio();
 
 });
 
+	function clearradio() {
+		var radio_btn_count =	$("[name=book_select]").length;
+		for (i = 0; i < radio_btn_count; i++) {
+			$("[name=book_select]")[i].checked = false;
+		}
+		$("#lending_book_button").attr("disabled", true);
+		$("#return_book_button").attr("disabled", true);
+		$("#delete_book_button").attr("disabled", true);
+		$("#show_book_button").attr("disabled", true);
+	}

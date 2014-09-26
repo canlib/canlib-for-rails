@@ -29,6 +29,15 @@ en: &en
       lending: Lending Service
       return: Return Service
       other: Books Information
+    btn_name:
+      lending: Lending
+      return: Return
+  books:
+    title: Books Information
+    btn_name:
+      add: Add
+      show: Show and Edit
+      delete: Delete
 
 en-US:
   <<: *en

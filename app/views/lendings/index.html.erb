@@ -3,13 +3,13 @@
 	<h1><%= @title %></h1>
 
 	<%= form_tag(lendings_search_path, method: "get", id: "search_window", class: "search") do %>
-		<%= text_field_tag :search_string, "", :placeholder => "検索ワードを入力", :class => "text-box", :maxlength => 50 %>
+		<%= text_field_tag :search_string, "", :placeholder => "タイトルを入力", :class => "text-box", :maxlength => 50 %>
 	  <%= submit_tag "検索", :id => "search_button", :class => "btn", :name => nil %>
 		<%= hidden_field_tag :job, @job %>
 	<% end %>
 
 	<% if @job == "lending" %>
-	<div id="dialog-form" title=<%= @btn_name %>>
+	<div id="lending-dialog-form" title=<%= @btn_name %>>
 		<p class="validateTips">貸出する利用者名を入力してください。</p>
 		<%= form_tag(book_lendings_path(1), method: "post", id: "lending_book", name: "user_name") do %>
 			<%= text_field_tag 'lending[user_name]', "", :maxlength => 25 %>
@@ -17,7 +17,7 @@
 	</div>
 	<button id="lending_book_button" class="btn btn-primary" disabled><%= @btn_name %></button>
 	<% elsif @job == "return" %>
-	<div id="dialog-confirm" title=<%= @btn_name %>>
+	<div id="lending-dialog-confirm" title=<%= @btn_name %>>
 		<p>
 			<span class="ui-icon ui-icon-alert"></span>
 			  返却してよろしいですか？	
@@ -38,7 +38,7 @@
 					<th>書籍タイトル</th>
 					<th>著者名</th>
 				<% if @job == "other" %>
-					<th>貸出状況</th>
+					<th class="lending-info">貸出状況</th>
 				<% end %>
 			</tr>
 		</thead>
