@@ -1,10 +1,15 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
+
   # GET /books
   # GET /books.json
   def index
-    @books = Book.paginate(page: params[:page], per_page: 10)
+    @books = Book.paginate(page: params[:page])
+		@title = t 'books.title'
+		@add_btn_name = t 'books.btn_name.add'
+		@show_btn_name = t 'books.btn_name.show'
+		@delete_btn_name = t 'books.btn_name.delete'
   end
 
   # GET /books/1
@@ -28,7 +33,7 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
+        format.html { redirect_to_back(book_path(@book.id), notice: 'Book was successfully created.') }
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new }
@@ -56,10 +61,19 @@ class BooksController < ApplicationController
   def destroy
     @book.destroy
     respond_to do |format|
-      format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
+      format.html { redirect_to_back(books_path, notice: 'Book was successfully destroyed.') }
       format.json { head :no_content }
     end
   end
+
+	def search
+		@title = t 'books.title'
+		@add_btn_name = t 'books.btn_name.add'
+		@show_btn_name = t 'books.btn_name.show'
+		@delete_btn_name = t 'books.btn_name.delete'
+		@books = Book.where("title LIKE ?", "%#{Book.escape_like(params[:search_string])}%").paginate(page: params[:page])
+		render :index
+	end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -74,4 +88,5 @@ class BooksController < ApplicationController
     def book_params
       params.require(:book).permit(:title, :author_name)
     end
+
 end

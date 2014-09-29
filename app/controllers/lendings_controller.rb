@@ -29,9 +29,9 @@ class LendingsController < ApplicationController
 		@lending.period = 14
 
     if @lending.save
-			redirect_to :back, notice: "Lending was successfully created."
+			redirect_to_back("/lending?job=lending", notice: "Lending was successfully created.")
     else
-			redirect_to :back, notice: "Lending Error"
+			redirect_to_back("/lending?job=lending", notice: "Lending Error")
     end
 	rescue
 		redirect_to lendings_path, notice: "This book is already rented out."
@@ -41,9 +41,9 @@ class LendingsController < ApplicationController
     @lending = Lending.find_by(book_id: params[:book_id])
 		if @lending.present?
 			@lending.destroy
-	    redirect_to :back, notice: "Lending was successfully destroyed."
+	    redirect_to_back("/lendings?job=return", notice: "Lending was successfully destroyed.")
 		else
-			redirect_to :back, notice: "Thid book is not rented out."
+			redirect_to_back("/lendings?job=return", notice: "This book is not rented out.")
 		end
 	end
 
@@ -68,4 +68,5 @@ class LendingsController < ApplicationController
     def lending_params
       params.require(:lending).permit(:date, :period, :user_name)
     end
+
 end

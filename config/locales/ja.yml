@@ -11,4 +11,9 @@ ja:
     btn_name:
       lending: 貸出する
       return: 返却する
-
+  books:
+    title: 蔵書一覧
+    btn_name:
+      add: 書籍を登録する
+      show: 書籍情報を確認・編集する
+      delete: 書籍を削除する

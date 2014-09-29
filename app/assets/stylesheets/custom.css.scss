@@ -81,7 +81,7 @@ input.text-box {
 
 /* table */
 
-table.lending-information {
+table {
 	margin-top: 0px;
 	width: 100%;
 	table-layout: fixed;
@@ -92,8 +92,9 @@ table.lending-information {
 	}
 
 	th, td {
-		width: 500px;
 		padding: 5px;
+		width: 400px;
+		word-break: break-all;
 	}
 
 	th {
@@ -113,11 +114,17 @@ table.lending-information {
 		text-align: center;
 	}
 
+	th.lending-info {
+		width: 100px;
+	}
+
 	td.lending {
+		width: 100px;
 		color: red;
 	}
 
 	td.no-lending {
+		width: 100px;
 		color: green;
 	}
 	
@@ -126,7 +133,7 @@ table.lending-information {
 		overflow-x: auto;
 		overflow-y: scroll;
 		height: 500px;
-		width: auto;
+		width: 100%;
 	}
 }
 	
@@ -142,6 +149,21 @@ button.ui-button {
 	margin-top: 30px;
 }
 
+#button_set {
+	position: relative;
+}
+
+#show_book_button, #add_book_button, #delete_book_button {
+	position: absolute;
+}
+
+#show_book_button {
+	left: 130px;
+}
+
+#delete_book_button {
+	left: 325px;
+}
 
 /* dialog */
 
