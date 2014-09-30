@@ -35,6 +35,24 @@ p {
 	line-height: 1.7em;
 }
 
+ul {
+	list-style-type: none;
+	margin: 0 0 0 0;
+}
+
+#edit_form_error_msg {
+	list-style-type: disc;
+	margin: 10px 10px 30px 30px;
+}
+
+#edit_page_lending_info {
+	margin-top: 20px;
+}
+
+.lending_info_list {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
 
 /* header */
 
@@ -64,6 +82,12 @@ img {
 .navbar-nav > li > a {
 	color: white;
 	padding-top: 22px;
+}
+
+#edit_book_error_message {
+	font-weight: bold;
+	margin-top: 30px;
+	margin-bottom: 30px;
 }
 
 
@@ -163,6 +187,10 @@ button.ui-button {
 
 #delete_book_button {
 	left: 325px;
+}
+
+#edit_book_button {
+	margin-bottom: 30px;
 }
 
 /* dialog */

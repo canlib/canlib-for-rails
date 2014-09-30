@@ -1,5 +1,5 @@
 <% provide(:title, '蔵書一覧') %>
-<h1>蔵書一覧</h1>
+<h1><%= t 'books.title.index'%></h1>
 
 <%= form_tag(books_search_path, method: "get", id: "search_window", class: "search") do %>
 	<%= text_field_tag :search_string, "", :placeholder => "タイトルを入力", :class => "text-box", :maxlength => 50 %>
@@ -15,7 +15,7 @@
   </div>
   <button id="add_book_button" class="btn btn-primary"><%= t 'books.btn_name.add' %></button>
 
-  <%= form_tag(edit_book_path(1), method: "get", id: "show_book") do %>
+  <%= form_tag(edit_book_path(1), method: "get", id: "show_book", target: "_blank") do %>
     <%= submit_tag (t "books.btn_name.show"), :id => "show_book_button", :class => "btn btn-primary", :name => nil, :disabled => true %>
   <% end %>
 

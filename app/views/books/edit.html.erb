@@ -1,6 +1,38 @@
-<h1>Editing book</h1>
+<% provide(:title, '書籍詳細') %>
+<h1><%= t 'books.title.detail' %></h1>
 
-<%= render 'form' %>
+	<%= form_for(@book) do |f| %>
+		<% unless @book.lending.present? %>
+			<%= f.submit((t "books.btn_name.edit"), :id => "update_button", :class => "btn btn-primary") %>
+		<% else %>
+			<p id="edit_book_error_message"><%= t 'message.edit_error' %></p>
+		<% end %>
 
-<%= link_to 'Show', @book %> |
-<%= link_to 'Back', books_path %>
+		<% if @book.errors.any? %>
+			<div id="error_explanation">
+				<h2><%= pluralize(@book.errors.count, "error") %>prohibited this book from being saved:</h2>
+			
+				<ul id="edit_form_error_msg">
+					<% @book.errors.full_messages.each do |message| %>
+						<li><%= message %></li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+
+		<ul>
+  		<li><%= t 'books.form_label.title' %>: <%= f.text_field :title, :maxlength => 50 %><br /></li>
+  		<li><%= t "books.form_label.author_name" %>: <%= f.text_field :author_name, :maxlength => 30 %><br /></li>
+		</ul>
+	<% end %>
+
+	<% if @book.lending.present? %>
+	<div id="edit_page_lending_info">
+		<ul>
+			<li class="lending_info_list"><%= t 'lending.label.user_name' %>: <%= @book.lending.user_name %></li>
+			<li class="lending_info_list"><%= t 'lending.label.date' %>: <%= @book.lending.date %></li>
+			<li class="lending_info_list"><%= t 'lending.label.limit' %>: <%= @book.lending.date + @book.lending.period %></li>
+		</ul>
+	</div>
+	<% end %>
+

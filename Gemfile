@@ -50,6 +50,7 @@ end
 group :test do
 	gem 'selenium-webdriver'
 	gem 'capybara'
+	gem 'simplecov'
 end
 
 gem 'execjs'
