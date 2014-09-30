@@ -31,10 +31,10 @@ class LendingsController < ApplicationController
     if @lending.save
 			redirect_to_back("/lending?job=lending", notice: "Lending was successfully created.")
     else
-			redirect_to_back("/lending?job=lending", notice: "Lending Error")
+			redirect_to_back("/lending?job=lending", alert: "Lending Error")
     end
 	rescue
-		redirect_to lendings_path, notice: "This book is already rented out."
+		redirect_to_back("/lending?job=lending", alert: "This book is already rented out.")
 	end
 
 	def destroy
@@ -43,7 +43,7 @@ class LendingsController < ApplicationController
 			@lending.destroy
 	    redirect_to_back("/lendings?job=return", notice: "Lending was successfully destroyed.")
 		else
-			redirect_to_back("/lendings?job=return", notice: "This book is not rented out.")
+			redirect_to_back("/lendings?job=return", alert: "This book is not rented out.")
 		end
 	end
 

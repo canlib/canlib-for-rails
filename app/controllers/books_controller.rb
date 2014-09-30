@@ -46,14 +46,14 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1.json
   def update
 		if @book.lending.present?
-			redirect_to edit_book_path, notice: 'This book is already rented out.'
+			redirect_to edit_book_path, alert: 'This book is already rented out.'
 		else
     	respond_to do |format|
       	if @book.update(book_params)
        	 format.html { redirect_to edit_book_path, notice: 'Book was successfully updated.' }
         	format.json { render :edit, status: :ok, location: @book }
       	else
-        	format.html { render :show }
+        	format.html { redirect_to edit_book_path, alert: 'Updateing failed. Please enter correctly.' }
         	format.json { render json: @book.errors, status: :unprocessable_entity }
       	end
     	end
