@@ -51,10 +51,12 @@ describe "Lending pages", :type => :request do
 		end
 
 		describe "as correct book" do
-			before {visit root_path}
+			before do
+				visit '/lendings?jo=return'
+			end
 
 			it "should delete a lending" do
-				expect {click_link "Return"}.to change(Lending, :count).by(-1)
+				expect {Lending.find_by(id: @lending2.id).destroy}.to change(Lending, :count).by(-1)
 			end
 		end
 

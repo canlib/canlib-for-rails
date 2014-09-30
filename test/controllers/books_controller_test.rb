@@ -36,7 +36,7 @@ class BooksControllerTest < ActionController::TestCase
 
   test "should update book" do
     patch :update, id: @book, book: { author_name: @book.author_name, title: @book.title }
-    assert_redirected_to book_path(assigns(:book))
+    assert_redirected_to edit_book_path(assigns(:book))
   end
 
   test "should destroy book" do

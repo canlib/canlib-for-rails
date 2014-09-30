@@ -32,12 +32,23 @@ en: &en
     btn_name:
       lending: Lending
       return: Return
+    label:
+      user_name: User Name
+      date: Lending Date
+      limit: Deadline
+      period: Lending Period
   books:
-    title: Books Information
+    title:
+      index: Books Information
+      detail: Book Detail Information
     btn_name:
       add: Add
       show: Show and Edit
       delete: Delete
+      edit: Save the changes
+    form_label:
+      title: Title
+      author_name: Author Name
 
 en-US:
   <<: *en

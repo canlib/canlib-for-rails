@@ -163,6 +163,10 @@ $(function() {
 			$("#add-book-dialog-form").dialog("open");
 	});
 
+	$("form#" + $("form").attr("id") + ".edit_book").submit(function() {
+		return confirm("更新します。よろしいですか？");
+	});
+
 	clearradio();
 
 });

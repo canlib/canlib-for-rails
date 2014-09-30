@@ -6,14 +6,14 @@ describe "Pages", :type => :request do
 	subject {page}
 
 	describe "Books page" do
-		before {visit books_path}
+		before {visit root_path}
 
 		it {is_expected.to have_content('蔵書一覧')}
 		it {is_expected.to have_title(full_title('蔵書一覧'))}
 
 		describe "pagination" do
 			before(:all) do
-				30.times{FactoryGirl.create(:book)}
+				100.times{FactoryGirl.create(:book)}
 			end
 			after(:all) {Book.delete_all}
 	

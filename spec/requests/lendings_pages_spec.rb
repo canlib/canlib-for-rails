@@ -16,7 +16,7 @@ describe "Lending pages" do
 
 		describe "pagination" do
 			before(:all) do
-				30.times{FactoryGirl.create(:book)}
+				100.times{FactoryGirl.create(:book)}
 				Book.all.each do |book|
 					FactoryGirl.create(:lending, book: book)
 				end
