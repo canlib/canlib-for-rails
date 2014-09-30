@@ -12,7 +12,8 @@
   <%= javascript_include_tag 'application' %>
 	<%= render 'layouts/header' %>
 	<% flash.each do |name, msg| %>
-			<%= content_tag(:div, msg, class: "alert alert-#{name}") %>
+			<% status = name == "notice" ? "success" : "danger" %>
+			<%= content_tag(:div, msg, class: "alert alert-#{status}") %>
 	<% end %>
 	<div class="container">
 		<%= yield %>
