@@ -17,7 +17,7 @@ describe "Pages", :type => :request do
 			end
 			after(:all) {Book.delete_all}
 	
-			it {should have_selector('div.pagination')}
+			it {is_expected.to have_selector('div.pagination')}
 		end			
 	end
 

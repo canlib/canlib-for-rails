@@ -84,5 +84,11 @@ RSpec.configure do |config|
 =end
 	require "simplecov"
 	SimpleCov.start "rails"
+
+	def redirect_to_back(default = root_path, *options)
+		tag_options = {}
+		options.first.each { |key, value| tag_options[key] = value } unless options.empty?
+		redirect_to (request.referer.present? ? :back : default), tag_options
+	end
 end
 

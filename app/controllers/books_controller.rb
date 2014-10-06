@@ -33,10 +33,10 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to_back(book_path(@book.id), notice: 'Book was successfully created.') }
+        format.html { redirect_to_back(books_path, notice: 'Book was successfully created.') }
         format.json { render :show, status: :created, location: @book }
       else
-        format.html { render :new }
+        format.html { redirect_to_back(books_path, alert: 'Create Book Error!') }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
