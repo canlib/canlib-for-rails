@@ -29,12 +29,12 @@ class LendingsController < ApplicationController
 		@lending.period = 14
 
     if @lending.save
-			redirect_to_back("/lending?job=lending", notice: "Lending was successfully created.")
+			redirect_to_back("/lendings?job=lending", notice: "Lending was successfully created.")
     else
-			redirect_to_back("/lending?job=lending", alert: "Lending Error")
+			redirect_to_back("/lendings?job=lending", alert: "Lending Error")
     end
 	rescue
-		redirect_to_back("/lending?job=lending", alert: "This book is already rented out.")
+		redirect_to_back("/lendings?job=lending", alert: "This book is already rented out.")
 	end
 
 	def destroy

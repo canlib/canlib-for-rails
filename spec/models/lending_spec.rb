@@ -35,4 +35,9 @@ RSpec.describe Lending, :type => :model do
 		it {is_expected.to be_valid}
 	end
 
+	describe "with too long user name" do
+		before {@lending.user_name = "a" * 26}
+		it {is_expected.not_to be_valid}
+	end
+
 end

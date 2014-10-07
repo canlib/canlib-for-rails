@@ -64,7 +64,7 @@ describe "Lending pages", :type => :request do
 			before {Lending.find_by(id: @lending2.id).destroy}
 
 			subject {page}
-			it {should_not have_link("Return")}
+			it {is_expected.not_to have_link("Return")}
 		end
 	end
 

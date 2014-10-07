@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Lending pages" do
+describe "Lending pages", :type => :request do
 	subject {page}
 
 	describe "index" do
@@ -11,8 +11,8 @@ describe "Lending pages" do
 			visit lendings_path
 		end
 
-		it {should have_title('貸出状況一覧')}
-		it {should have_content('貸出状況一覧')}
+		it {is_expected.to have_title('貸出状況一覧')}
+		it {is_expected.to have_content('貸出状況一覧')}
 
 		describe "pagination" do
 			before(:all) do
@@ -23,7 +23,7 @@ describe "Lending pages" do
 			end
 			after(:all) {Book.delete_all}
 	
-			it {should have_selector('div.pagination')}
+			it {is_expected.to have_selector('div.pagination')}
 		end			
 	end
 
