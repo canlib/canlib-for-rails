@@ -25,9 +25,6 @@ describe LendingsController do
 			it "should be success" do
 				expect(response.status).to eq(200)
 				expect(response).to render_template("index")
-			end
-
-			it "should have all lending books" do
 				expect(assigns[:books].size).to eq(Book.includes(:lending).where(:lendings => {:book_id => nil}).count)
 			end
 		end
@@ -38,9 +35,6 @@ describe LendingsController do
 			it "should be success" do
 				expect(response.status).to eq(200)
 				expect(response).to render_template("index")
-			end
-
-			it "should have all lending books" do
 				expect(assigns[:books].size).to eq(Book.joins(:lending).count)
 			end
 		end
@@ -61,27 +55,19 @@ describe LendingsController do
 		describe "with the valid data" do
 			let(:params) {{:lending => {:date => Date.today, :period => 14, :user_name => "test"}, :book_id => @book_no_lending.id}}
 
-			it "should be success" do
-				request
+			it "should create new lending" do
+				expect {request}.to change(Lending, :count).by(1)
 				expect(response.status).to eq(302)
 				expect(response).to redirect_to lendings_path(:job => "lending")
-			end
-
-			it "should create new lending" do
-				expect {post :create, params}.to change(Lending, :count).by(1)
 			end
 		end
 
 		describe "with the invalid data" do
 			let(:params) {{:lending => {:user_name => "\s"}, :book_id => @book_no_lending.id}}
 
-			it "should be validation error" do
-				request
-				expect(assigns(:lending).errors).not_to be_empty
-			end
-
 			it "should not create new lending" do
 				expect {request}.not_to change(Lending, :count)
+				expect(assigns(:lending).errors).not_to be_empty
 			end
 		end
 
@@ -106,13 +92,9 @@ describe LendingsController do
 		end
 
 		describe "when the lending exists" do
-			it "should be success" do
-				request
-				expect(assigns(:lending).errors).to be_empty
-			end
-
 			it "should destroy one lending" do
 				expect {request}.to change(Lending, :count).by(-1)
+				expect(assigns(:lending).errors).to be_empty
 			end
 		end		
 	end
@@ -126,15 +108,7 @@ describe LendingsController do
 			it "should be success" do
 				request
 				expect(response.status).to eq(200)
-			end
-
-			it "should read index template" do
-				request
 				expect(response).to render_template("index")
-			end
-
-			it "should have matching books" do
-				request
 				expect(assigns[:books].size).to eq(Book.includes(:lending).where(:lendings => {:book_id => nil}).where("title like '%2%'").count)
 			end
 		end
@@ -145,15 +119,7 @@ describe LendingsController do
 			it "should be success" do
 				request
 				expect(response.status).to eq(200)
-			end
-
-			it "should read index template" do
-				request
 				expect(response).to render_template("index")
-			end
-
-			it "should have matching books" do
-				request
 				expect(assigns[:books].size).to eq(Book.joins(:lending).where("title like '%2%'").count)
 			end
 		end

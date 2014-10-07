@@ -4,6 +4,7 @@ describe BooksController, :type => :controller do
 
 	before do
 		@book = FactoryGirl.create(:book)
+		@book2 = FactoryGirl.create(:book)
 		@params = {
 			:title => @book.title,
 			:author_name => @book.author_name
@@ -16,10 +17,6 @@ describe BooksController, :type => :controller do
 				expect {
 				 post :create, :book => @params 
 				}.to change(Book, :count).by(1)
-			end
-
-			it "should redirect to book page" do
-				post :create, :book => @params
 				expect(response).to redirect_to books_path
 			end
 		end
@@ -35,10 +32,6 @@ describe BooksController, :type => :controller do
 
 				it "should not create new book" do
 					expect {post :create, :book => @params_no_title}.to_not change(Book, :count)
-				end
-
-				it "should redirect to books page" do
-					post :create, :book => @params_no_title
 					expect(response).to redirect_to books_path
 				end
 			end
@@ -53,10 +46,7 @@ describe BooksController, :type => :controller do
 
 				it "should not create new book" do
 					expect {post :create, :book => @params_no_authorname}.to_not change(Book, :count)
-				end
-
-				it "should redirect to books page" do
-					post :create, :book => @params_no_authorname
+					expect(response.status).to eq(302)
 					expect(response).to redirect_to books_path
 				end
 			end
@@ -68,34 +58,34 @@ describe BooksController, :type => :controller do
 
 		it "should be success" do
 			expect(response.status).to eq(200)
-		end
-
-		it "should read index template" do
 			expect(response).to render_template("index")
-		end
-
-		it "should have all books" do
 			expect(assigns[:books].size).to eq(Book.all.count)
 		end
 	end
 
 	describe "#update" do
+		describe "with unknown parameters" do
+			let(:request) {patch :update, :book => {:title => "new title", :author_name => "new author", :admin => true}, :id => @book.id}
+
+			it "should be success" do
+				request
+				expect(assigns[:book].title).to eq("new title")
+				expect(response.status).to eq(302)
+				expect(response).to redirect_to edit_book_path
+			end
+		end
+
 		describe "with the valid data" do
 			before do
 				patch :update, :book => @params, :id => @book.id					
 			end
 			
-			it "should not accord with the selected book" do
+			it "should be success" do
 				expect(assigns(:book)).to eq(@book)
-			end
-
-			it "should redirect to edit book page" do
-				expect(response).to redirect_to edit_book_path(@book.id)
-			end
-			
-			it "should not be error" do
 				request
 				expect(assigns(:book).errors).to be_empty
+				expect(response.status).to eq(302)
+				expect(response).to redirect_to edit_book_path(@book.id)
 			end
 		end
 	
@@ -108,37 +98,25 @@ describe BooksController, :type => :controller do
 				patch :update, :book => @invalid_params, :id => @book.id
 			end
 			
-			it "should not accord with the selected book" do
+			it "should be error" do
 				expect(assigns(:book)).to eq(@book)
-			end
-
-			it "should redirect to edit book page" do
-				expect(response).to redirect_to edit_book_path(@book.id)
-			end
-
-			it "should be validation error" do
 				expect(assigns(:book).errors).not_to be_empty
+				expect(response.status).to eq(302)
+				expect(response).to redirect_to edit_book_path(@book.id)
 			end
 		end
 	end
 
 	describe "#destroy" do
-		describe "with the right data" do
+		describe "with the valid data" do
 			let(:request) {delete :destroy, params}
 			let(:params) {{:id => @book.id}}
 			
-			it "should redirect to books page" do
-				request
-				expect(response).to redirect_to books_path
-			end
-
 			it "should delete one book" do
-				expect{delete :destroy, :id => @book.id}.to change(Book, :count).by(-1)
-			end
-
-			it "should accord with the selected book" do
-				request
+				expect{request}.to change(Book, :count).by(-1)
 				expect(assigns(:book)).to eq(@book)
+				expect(response.status).to eq(302)
+				expect(response).to redirect_to books_path
 			end
 		end
 	end
@@ -150,17 +128,21 @@ describe BooksController, :type => :controller do
 		end
 
 		it "should be success" do
-			expect(response).to be_success
-		end
-
-		it "should read index template" do
+			expect(response.status).to eq(200)
 			expect(response).to render_template("index")
-		end
-
-		it "should have matching books" do
 			expect(assigns[:books].size).not_to eq(Book.all.count)
-			expect(assigns[:books].size).to eq(1)
+			expect(assigns[:books].size).to eq(2)
 		end
 	end
 
+	describe "404 error" do
+		before do
+			get :show, {:id => 99999} 
+		end
+
+		it "should redirect to not found page" do
+			expect(response.status).to eq(404)
+			expect(response).to render_template("error")
+		end
+	end			
 end
