@@ -6,6 +6,7 @@ html {
 
 body {
 	padding-top: 70px;
+	min-width: 820px;
 }
 
 section {
@@ -14,6 +15,13 @@ section {
 
 textarea {
 	resize: vertical;
+}
+
+.container, .navbar-static-top .container,
+.navbar-fixed-top .container,
+.navbar-fixed-bottom .container {
+	max-width: 900px;
+	padding-top: 30px;
 }
 
 
@@ -50,8 +58,7 @@ ul {
 }
 
 .lending_info_list {
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin: 10px 0 10px 0;
 }
 
 /* header */
@@ -63,8 +70,7 @@ ul {
 	color: white;
 	text-transform: uppercase;
 	letter-spacing: -1px;
-	padding-top: 15px;
-	padding-bottom: 15px;
+	padding: 15px 0 15px 50px;
 	font-weight: bold;
 	line-height: 1;
 
@@ -84,10 +90,23 @@ img {
 	padding-top: 22px;
 }
 
+.nav {
+	padding-right: 50px;
+}
+
 #edit_book_error_message {
 	font-weight: bold;
-	margin-top: 30px;
-	margin-bottom: 30px;
+	margin: 30px 0 30px 0;
+}
+
+.navbar-fixed-top {
+	position: absolute;
+	min-width: 900px;
+	
+	.header_menu {
+		max-width: 1000px;
+		margin: 0 auto;
+	}
 }
 
 
@@ -101,6 +120,7 @@ input.text-box {
 
 #search_window {
 	float: right;
+	margin-bottom: 50px;
 }
 
 /* table */
@@ -165,8 +185,7 @@ table {
 /* button */
 
 .btn-primary {
-	margin-top: 25px;
-	margin-bottom: 10px;
+	margin: 55px 0 10px 0;
 }
 
 button.ui-button {
@@ -200,9 +219,26 @@ span.ui-icon {
 	margin: 4px 7px 20px 0;
 }
 
+div.ui-widget-overlay {
+	position: fixed;
+}
 
 /* input */
 
 input[type="text"] {
 	height: 25px;
+}
+
+
+/* alert */
+
+.alert {
+	margin-bottom: unset;
+}
+
+
+/* pagination */
+
+.books_pagination {
+	text-align: center;
 }
