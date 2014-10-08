@@ -212,6 +212,11 @@ button.ui-button {
 	margin-bottom: 30px;
 }
 
+#update_button {
+	margin: 30px;
+}
+
+
 /* dialog */
 
 span.ui-icon {
@@ -241,4 +246,44 @@ input[type="text"] {
 
 .books_pagination {
 	text-align: center;
+}
+
+
+/* input form */
+
+.input_label {
+	width: 130px;
+	font-weight: unset;
+	text-align: right;
+}
+
+.input_label_dialog {
+	text-align: right;
+	width: 80px;
+	font-weight: unset;
+}
+
+.input_value_dialog {
+		margin-left: 80px;
+}
+
+
+/* definition list */
+
+dt {
+	float: left;
+	clear: both;
+}
+
+dd {
+	margin-left: 130px;
+	padding-left: 10px;
+}
+
+dt, dd {
+	margin-bottom: 10px;
+}
+
+dt:after {
+	content: ":";
 }
