@@ -19,19 +19,19 @@
 			</div>
 		<% end %>
 
-		<ul>
-  		<li><%= t 'books.form_label.title' %>: <%= f.text_field :title, :maxlength => 50 %><br /></li>
-  		<li><%= t "books.form_label.author_name" %>: <%= f.text_field :author_name, :maxlength => 30 %><br /></li>
-		</ul>
+		<dl>
+  		<dt class="input_label"><%= t 'books.form_label.title' %></dt><dd><%= f.text_field :title, :maxlength => 50 %></dd>
+  		<dt class="input_label"><%= t "books.form_label.author_name" %></dt><dd><%= f.text_field :author_name, :maxlength => 30 %></dd>
+		</dl>
 	<% end %>
 
 	<% if @book.lending.present? %>
 	<div id="edit_page_lending_info">
-		<ul>
-			<li class="lending_info_list"><%= t 'lending.label.user_name' %>: <%= @book.lending.user_name %></li>
-			<li class="lending_info_list"><%= t 'lending.label.date' %>: <%= @book.lending.date %></li>
-			<li class="lending_info_list"><%= t 'lending.label.limit' %>: <%= @book.lending.date + @book.lending.period %></li>
-		</ul>
+		<dl>
+			<dt class="input_label"><%= t 'lending.label.user_name' %></dt><dd><%= @book.lending.user_name %></dd>
+			<dt class="input_label"><%= t 'lending.label.date' %></dt><dd><%= @book.lending.date %></dd>
+			<dt class="input_label"><%= t 'lending.label.limit' %></dt><dd><%= @book.lending.date + @book.lending.period %></dd>
+		</dl>
 	</div>
 	<% end %>
 

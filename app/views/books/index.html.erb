@@ -9,8 +9,10 @@
   <div id="add-book-dialog-form" title=<%= t 'books.btn_name.add' %>>
     <p class="validateTips">書籍タイトルと著者名を入力してください。</p>
     <%= form_tag(books_path, method: "post", id: "add_book", name: "book_data") do %>
-      <%= t 'books.form_label.title' %>	<%= text_field_tag 'book[title]', "", :maxlength => 50 %><br />
-      <%= t "books.form_label.author_name" %> <%= text_field_tag 'book[author_name]', "", :maxlength => 30 %>
+		<dl>
+      <dt class="input_label_dialog"><%= t 'books.form_label.title' %></dt><dd class="input_value_dialog"><%= text_field_tag 'book[title]', "", :maxlength => 50 %></dd>
+      <dt class="input_label_dialog"><%= t "books.form_label.author_name" %></dt><dd class="input_value_dialog"><%= text_field_tag 'book[author_name]', "", :maxlength => 30 %></dd>
+		</dl>
     <% end %>	
   </div>
   <button id="add_book_button" class="btn btn-primary"><%= t 'books.btn_name.add' %></button>
