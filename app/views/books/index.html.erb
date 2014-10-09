@@ -1,17 +1,17 @@
-<% provide(:title, '蔵書一覧') %>
+<% provide(:title, (t 'books.title.index')) %>
 <h1><%= t 'books.title.index'%></h1>
 
 <%= form_tag(books_search_path, method: "get", id: "search_window", class: "search") do %>
-	<%= text_field_tag :search_string, "", :placeholder => "タイトルを入力", :class => "text-box", :maxlength => 50 %>
-  <%= submit_tag "検索", :id => "search_button", :class => "btn", :name => nil %>
+	<%= text_field_tag :search_string, "", :placeholder => (t 'search.placeholder'), :class => "text-box", :maxlength => 50 %>
+  <%= submit_tag (t 'button.search'), :id => "search_button", :class => "btn", :name => nil %>
 <% end %>
 <div id="button_set">
   <div id="add-book-dialog-form" title=<%= t 'books.btn_name.add' %>>
-    <p class="validateTips">書籍タイトルと著者名を入力してください。</p>
+    <p class="validateTips"><%= t 'dialog.confirm.book_add' %></p>
     <%= form_tag(books_path, method: "post", id: "add_book", name: "book_data") do %>
 		<dl>
-      <dt class="input_label_dialog"><%= t 'books.form_label.title' %></dt><dd class="input_value_dialog"><%= text_field_tag 'book[title]', "", :maxlength => 50 %></dd>
-      <dt class="input_label_dialog"><%= t "books.form_label.author_name" %></dt><dd class="input_value_dialog"><%= text_field_tag 'book[author_name]', "", :maxlength => 30 %></dd>
+      <dt class="input_label_dialog"><%= t 'books.label.title' %></dt><dd class="input_value_dialog"><%= text_field_tag 'book[title]', "", :maxlength => 50 %></dd>
+      <dt class="input_label_dialog"><%= t "books.label.author_name" %></dt><dd class="input_value_dialog"><%= text_field_tag 'book[author_name]', "", :maxlength => 30 %></dd>
 		</dl>
     <% end %>	
   </div>
@@ -24,7 +24,7 @@
   <div id="delete-dialog-confirm" title=<%= t 'books.btn_name.delete' %>>
 	  <p>
 		  <span class="ui-icon ui-icon-alert"></span>
-		  本当に削除してよろしいですか？	
+		  <%= t 'dialog.confirm.book_delete' %>	
 		  <%= form_tag(book_path(1), method: "delete", id: "delete_book") do %>
 		  <% end %>
 	  </p>
@@ -35,9 +35,9 @@
 <table>
   <thead>
     <tr>
-			<th class="selector">書籍の選択</th>
-      <th>タイトル</th>
-      <th>著者名</th>
+			<th class="selector"><%= t 'books.table_header.radio' %></th>
+      <th><%= t 'books.label.title' %></th>
+      <th><%= t 'books.label.author_name' %></th>
     </tr>
   </thead>
 

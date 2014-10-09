@@ -21,15 +21,12 @@ $(function() {
 		tips
 			.text(t)
 			.addClass("ui-state-highlight");
-		setTimeout(function() {
-			tips.removeClass("ui-state-highlight", 1500);
-		}, 500);
 	}
 
 	function checkLength(o, n, min, max) {
 		if (o.val().length > max || o.val().length < min) {
 			o.addClass("ui-state-error");
-			updateTips("Length of " + n + "must be between " + min + " and " + max + ".");
+			updateTips(n + I18n.check_min + min + I18n.check_between + max + I18n.check_max);
 			return false;
 		} else {
 			return true;
@@ -41,25 +38,28 @@ $(function() {
 		height: 300,
 		width: 350,
 		modal: true,
-		buttons: {
-			"OK": function() {
+		buttons: [{
+			text: I18n.ok_button,
+			click: function() {
 				var user_name = $("#lending_user_name").on("textchange", function() {});
 				var bValid = true;
 
 				allFields.removeClass("ui-state-error");
 
-				bValid = bValid && checkLength(user_name, "利用者名", 1, 25);
+				bValid = bValid && checkLength(user_name, I18n.label_user_name, 1, 25);
 
 				if (bValid) {
 					$("#lending_book").submit();
 					$(this).dialog("close");
 				}
-			},
-			"キャンセル": function() {
+			}
+		},{
+			text: I18n.cancel_button,
+			click: function() {
 			allFields.val("").removeClass("ui-state-error");
 				$(this).dialog("close");
 			}
-		},
+		}],
 		close: function() {
 			allFields.val("").removeClass("ui-state-error");
 		}
@@ -89,15 +89,18 @@ $(function() {
 		height: 300,
 		width: 350,
 		modal: true,
-		buttons: {
-			"OK": function() {
+		buttons: [{
+			text: I18n.ok_button,
+			click: function() {
 				$("#return_book").submit();
 				$(this).dialog("close");
-			},
-			"キャンセル": function() {
+			}
+		},{
+			text: I18n.cancel_button,
+			click: function() {
 				$(this).dialog("close");
 			}
-		}
+		}]
 	});
  	
 
@@ -111,15 +114,18 @@ $(function() {
 		height: 300,
 		width: 350,
 		modal: true,
-		buttons: {
-			"OK": function() {
+		buttons: [{
+			text: I18n.ok_button,
+			click: function() {
 				$("#delete_book").submit();
 				$(this).dialog("close");
-			},
-			"キャンセル": function() {
+			}
+		},{
+			text: I18n.cancel_button,
+			click: function() {
 				$(this).dialog("close");
 			}
-		}
+		}]
 	});
 
 	$("#delete_book_button")
@@ -130,29 +136,32 @@ $(function() {
 	$("#add-book-dialog-form").dialog({
 		autoOpen: false,
 		height: 300,
-		width: 350,
+		width: 400,
 		modal: true,
-		buttons: {
-			"OK": function() {
+		buttons: [{
+			text: I18n.ok_button, 
+			click: function() {
 				var title = $("#book_title").on("textchange", function() {});
 				var author_name = $("#book_author_name").on("textchange", function() {});
 				var bValid = true;
 
 				allFields.removeClass("ui-state-error");
 
-				bValid = bValid && checkLength(title, "書籍タイトル", 1, 50);
-				bValid = bValid && checkLength(author_name, "著者名", 1, 30);
+				bValid = bValid && checkLength(title, I18n.label_title, 1, 50);
+				bValid = bValid && checkLength(author_name, I18n.label_author_name, 1, 30);
 
 				if (bValid) {
 					$("#add_book").submit();
 					$(this).dialog("close");
 				}
-			},
-			"キャンセル": function() {
+			}
+		},{
+			text: I18n.cancel_button,
+			click: function() {
 			allFields.val("").removeClass("ui-state-error");
 				$(this).dialog("close");
 			}
-		},
+		}],
 		close: function() {
 			allFields.val("").removeClass("ui-state-error");
 		}
@@ -163,8 +172,28 @@ $(function() {
 			$("#add-book-dialog-form").dialog("open");
 	});
 
-	$("form#" + $("form").attr("id") + ".edit_book").submit(function() {
-		return confirm("更新します。よろしいですか？");
+	$("#update_button")
+		.click(function() {
+		$("#update-dialog-confirm").dialog("open");
+	});
+
+	$("#update-dialog-confirm").dialog({
+		autoOpen: false,
+		height: 300,
+		width: 350,
+		modal: true,
+		buttons: [{
+			text: I18n.ok_button,
+			click: function() {
+				$("form.edit_book").submit();
+				$(this).dialog("close");
+			}
+		},{
+			text: I18n.cancel_button,
+			click: function() {
+				$(this).dialog("close");
+			}
+		}]
 	});
 
 	clearradio();

@@ -3,14 +3,14 @@
 	<h1><%= @title %></h1>
 
 	<%= form_tag(lendings_search_path, method: "get", id: "search_window", class: "search") do %>
-		<%= text_field_tag :search_string, "", :placeholder => "タイトルを入力", :class => "text-box", :maxlength => 50 %>
-	  <%= submit_tag "検索", :id => "search_button", :class => "btn", :name => nil %>
+		<%= text_field_tag :search_string, "", :placeholder => (t 'search.placeholder'), :class => "text-box", :maxlength => 50 %>
+	  <%= submit_tag (t 'button.search'), :id => "search_button", :class => "btn", :name => nil %>
 		<%= hidden_field_tag :job, @job %>
 	<% end %>
 
 	<% if @job == "lending" %>
 	<div id="lending-dialog-form" title=<%= @btn_name %>>
-		<p class="validateTips">貸出する利用者名を入力してください。</p>
+		<p class="validateTips"><%= t 'dialog.confirm.lending' %></p>
 		<%= form_tag(book_lendings_path(1), method: "post", id: "lending_book", name: "user_name") do %>
 			<%= text_field_tag 'lending[user_name]', "", :maxlength => 25 %>
 		<% end %>	
@@ -20,7 +20,7 @@
 	<div id="lending-dialog-confirm" title=<%= @btn_name %>>
 		<p>
 			<span class="ui-icon ui-icon-alert"></span>
-			  返却してよろしいですか？	
+			  <%= t 'dialog.confirm.return' %>	
 			<%= form_tag(book_lending_path(1, 1), method: "delete", id: "return_book", name: "user_name") do %>
 			<% end %>
 		</p>
@@ -33,12 +33,12 @@
 		<thead>
 			<tr>
 				<% unless @job == "other" %>
-					<th class="selector">書籍の選択</th>
+					<th class="selector"><%= t 'books.table_header.radio' %></th>
 				<% end %>
-					<th>書籍タイトル</th>
-					<th>著者名</th>
+					<th><%= t 'books.label.title' %></th>
+					<th><%= t 'books.label.author_name' %></th>
 				<% if @job == "other" %>
-					<th class="lending-info">貸出状況</th>
+					<th class="lending-info"><%= t 'books.table_header.status' %></th>
 				<% end %>
 			</tr>
 		</thead>
@@ -52,9 +52,9 @@
 						<td><%= book.title %></td>
 						<td><%= book.author_name %></td>
 						<% if @job == "other" && book.lending.present? %>
-							<td class="lending">貸出中</td>
+							<td class="lending"><%= t 'lending.status.rented_out' %></td>
 						<% elsif @job == "other" %>
-							<td class="no-lending">保管中</td>
+							<td class="no-lending"><%= t 'lending.status.kept' %></td>
 						<% end %>
 					</tr>
 				<% end %>

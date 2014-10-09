@@ -1,4 +1,8 @@
 ja:
+  will_paginate:
+    previous_label: 前ページ
+    next_label: 次ページ
+  app_name: かんりぶ
   error:
     not_found:
       title: お探しのページは見つかりません
@@ -12,10 +16,13 @@ ja:
       lending: 貸出する
       return: 返却する
     label:
-      user_name: 借りている利用者名
+      user_name: 利用者名
       date: 貸出日
       limit: 返却期限
       period: 貸出期間
+    status:
+      rented_out: 貸出中
+      kept: 保管中
   books:
     title:
       index: 蔵書一覧
@@ -25,8 +32,48 @@ ja:
       show: 書籍情報を確認・編集する
       delete: 書籍を削除する
       edit: 書籍情報を更新する
-    form_label:
+    label:
       title: 書籍タイトル
       author_name: 著者名
+    table_header:
+      radio: 書籍の選択
+      status: 貸出状況
+  dialog:
+    confirm:
+      lending: 貸出する利用者名を入力してください
+      return: 返却します。よろしいですか？
+    book_add: 書籍タイトルと著者名を入力してください
+      book_delete: 削除します。本当によろしいですか？
+      book_update: 更新します。よろしいですか？
+    check_length:
+      min: は、  
+      between: "文字以上 "
+      max: 文字以下で登録してください
   message:
     edit_error: 貸出中のため、書籍情報を変更できません
+  search:
+    placeholder: タイトルを入力
+    result:
+      all_count: 冊中、
+      hit_count: 冊の本が見つかりました
+  alert:
+    success:
+      book_add: 書籍を登録しました
+      book_delete: 書籍を削除しました
+      book_update: 書籍情報を更新しました
+      lending_create: 貸出処理が成功しました
+      lending_delete: 返却処理が成功しました
+    error:
+      book_add: 書籍の登録に失敗しました
+      book_delete: 書籍の削除に失敗しました
+      book_update:
+        rented_out: 貸出中は更新できません
+        other: エラーが発生しました。正しく入力してください
+      lending_create:
+        rollback: 貸出処理が失敗しました。正しく入力してください
+        other: エラーが発生しました。すでに貸出されている可能性があります
+      lending_delete: この本は既に返却されています
+  button:
+    ok: OK
+    cancel: キャンセル
+    search: 検索

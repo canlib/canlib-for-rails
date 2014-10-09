@@ -1,12 +1,19 @@
-<% provide(:title, '書籍詳細') %>
+<% provide(:title, (t 'books.title.detail')) %>
 <h1><%= t 'books.title.detail' %></h1>
 
+	<% unless @book.lending.present? %>
+		<button id="update_button" class="btn btn-primary"><%= t 'books.btn_name.edit' %></button>	
+	<% else %>
+		<p id="edit_book_error_message"><%= t 'message.edit_error' %></p>
+	<% end %>
+
 	<%= form_for(@book) do |f| %>
-		<% unless @book.lending.present? %>
-			<%= f.submit((t "books.btn_name.edit"), :id => "update_button", :class => "btn btn-primary") %>
-		<% else %>
-			<p id="edit_book_error_message"><%= t 'message.edit_error' %></p>
-		<% end %>
+			<div id="update-dialog-confirm" title=<%= t 'books.btn_name.edit' %>>
+				<p>
+					<span class="ui-icon ui-icon-alert"></span>
+					<%= t 'dialog.confirm.book_update' %>
+				</p>
+			</div>
 
 		<% if @book.errors.any? %>
 			<div id="error_explanation">
@@ -20,8 +27,8 @@
 		<% end %>
 
 		<dl>
-  		<dt class="input_label"><%= t 'books.form_label.title' %></dt><dd><%= f.text_field :title, :maxlength => 50 %></dd>
-  		<dt class="input_label"><%= t "books.form_label.author_name" %></dt><dd><%= f.text_field :author_name, :maxlength => 30 %></dd>
+  		<dt class="input_label"><%= t 'books.label.title' %></dt><dd><%= f.text_field :title, :maxlength => 50 %></dd>
+  		<dt class="input_label"><%= t 'books.label.author_name' %></dt><dd><%= f.text_field :author_name, :maxlength => 30 %></dd>
 		</dl>
 	<% end %>
 

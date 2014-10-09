@@ -7,6 +7,19 @@
 	<%= render 'layouts/shim' %>
 </head>
 <body>
+	<script type="text/javascript">
+		var I18n = {
+			"ok_button": "<%= I18n.t 'button.ok' %>",
+			"cancel_button": "<%= I18n.t 'button.cancel' %>",
+			"update_confirm": "<%= I18n.t 'dialog.confirm.book_update' %>",
+			"label_user_name": "<%= I18n.t 'lending.label.user_name' %>",
+			"label_title": "<%= I18n.t 'books.label.title' %>",
+			"label_author_name": "<%= I18n.t 'books.label.author_name' %>",
+			"check_min": "<%= I18n.t 'dialog.check_length.min' %>",
+			"check_between": "<%= I18n.t 'dialog.check_length.between' %>",
+			"check_max": "<%= I18n.t 'dialog.check_length.max' %>"
+		};
+	</script>
   <%= javascript_include_tag 'jquery-2.1.1.min' %>
   <%= javascript_include_tag 'jquery-ui/1.11.1/jquery-ui.min' %>
   <%= javascript_include_tag 'application' %>

@@ -29,21 +29,21 @@ class LendingsController < ApplicationController
 		@lending.period = 14
 
     if @lending.save
-			redirect_to_back("/lendings?job=lending", notice: "Lending was successfully created.")
+			redirect_to_back("/lendings?job=lending", notice: (t 'alert.success.lending_create'))
     else
-			redirect_to_back("/lendings?job=lending", alert: "Lending Error")
+			redirect_to_back("/lendings?job=lending", alert: (t 'alert.error.lending_create.rollback'))
     end
 	rescue
-		redirect_to_back("/lendings?job=lending", alert: "This book is already rented out.")
+		redirect_to_back("/lendings?job=lending", alert: (t 'alert.error.lending_create.other'))
 	end
 
 	def destroy
     @lending = Lending.find_by(book_id: params[:book_id])
 		if @lending.present?
 			@lending.destroy
-	    redirect_to_back("/lendings?job=return", notice: "Lending was successfully destroyed.")
+	    redirect_to_back("/lendings?job=return", notice: (t 'alert.success.lending_delete'))
 		else
-			redirect_to_back("/lendings?job=return", alert: "This book is not rented out.")
+			redirect_to_back("/lendings?job=return", alert: (t 'alert.error.lending_delete'))
 		end
 	end
 
