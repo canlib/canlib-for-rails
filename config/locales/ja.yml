@@ -42,11 +42,11 @@ ja:
     confirm:
       lending: 貸出する利用者名を入力してください
       return: 返却します。よろしいですか？
-    book_add: 書籍タイトルと著者名を入力してください
-      book_delete: 削除します。本当によろしいですか？
+      book_add: 書籍タイトルと著者名を入力してください
+      book_delete: 削除します。よろしいですか？
       book_update: 更新します。よろしいですか？
     check_length:
-      min: は、  
+      min: は、
       between: "文字以上 "
       max: 文字以下で登録してください
   message:

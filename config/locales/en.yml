@@ -1,6 +1,6 @@
 en: &en
   will_paginate:
-    previous_label: Previous Page 
+    previous_label: Previous Page
     next_label: Next Page
   app_name: Canlib
   error:
@@ -49,7 +49,7 @@ en: &en
       min: ": The number of characters is from "
       between: " to "
       max: .
-  message: 
+  message:
     edit_error: You cannot edit the data of this book because this book is rented out.
   search:
     placeholder: Enter the book title
