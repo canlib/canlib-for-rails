@@ -33,10 +33,10 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to_back(books_path, notice: 'Book was successfully created.') }
+        format.html { redirect_to_back(books_path, notice: (t 'alert.success.book_add')) }
         format.json { render :show, status: :created, location: @book }
       else
-        format.html { redirect_to_back(books_path, alert: 'Create Book Error!') }
+        format.html { redirect_to_back(books_path, alert: (t 'alert.error.book_add')) }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
@@ -46,14 +46,14 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1.json
   def update
 		if @book.lending.present?
-			redirect_to edit_book_path, alert: 'This book is already rented out.'
+			redirect_to edit_book_path, alert: (t 'alert.error.book_update.rented_out')
 		else
     	respond_to do |format|
       	if @book.update(book_params)
-       	 format.html { redirect_to edit_book_path, notice: 'Book was successfully updated.' }
+       	 format.html { redirect_to edit_book_path, notice: (t 'alert.success.book_update') }
         	format.json { render :edit, status: :ok, location: @book }
       	else
-        	format.html { redirect_to edit_book_path, alert: 'Updateing failed. Please enter correctly.' }
+        	format.html { redirect_to edit_book_path, alert: (t 'alert.error.book_update.other') }
         	format.json { render json: @book.errors, status: :unprocessable_entity }
       	end
     	end
@@ -65,7 +65,7 @@ class BooksController < ApplicationController
   def destroy
     @book.destroy
     respond_to do |format|
-      format.html { redirect_to_back(books_path, notice: 'Book was successfully destroyed.') }
+      format.html { redirect_to_back(books_path, notice: (t 'alert.success.book_delete')) }
       format.json { head :no_content }
     end
   end

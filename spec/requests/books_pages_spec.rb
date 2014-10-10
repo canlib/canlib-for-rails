@@ -8,8 +8,8 @@ describe "Pages", :type => :request do
 	describe "Books page" do
 		before {visit root_path}
 
-		it {is_expected.to have_content('蔵書一覧')}
-		it {is_expected.to have_title(full_title('蔵書一覧'))}
+		it {is_expected.to have_content(I18n.t('books.title.index'))}
+		it {is_expected.to have_title(full_title(I18n.t('books.title.index')))}
 
 		describe "pagination" do
 			before(:all) do

@@ -1,25 +1,8 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en: &en
+  will_paginate:
+    previous_label: Previous Page
+    next_label: Next Page
+  app_name: Canlib
   error:
     not_found:
       title: This page cannot be found
@@ -37,6 +20,9 @@ en: &en
       date: Lending Date
       limit: Deadline
       period: Lending Period
+    status:
+      rented_out: rented out
+      kept: kept
   books:
     title:
       index: Books Information
@@ -46,9 +32,51 @@ en: &en
       show: Show and Edit
       delete: Delete
       edit: Save the changes
-    form_label:
+    label:
       title: Title
       author_name: Author Name
-
+    table_header:
+      radio: Selector
+      status: Status
+  dialog:
+    confirm:
+      lending: Please input the user name.
+      return: Are you sure of the returning?
+      book_add: Please input title and author name.
+      book_delete: This book will be deleted. Are you quite sure?
+      book_update: This book will be updated. Are you sure?
+    check_length:
+      min: ": The number of characters is from "
+      between: " to "
+      max: .
+  message:
+    edit_error: You cannot edit the data of this book because this book is rented out.
+  search:
+    placeholder: Enter the book title
+    result:
+      all_count: books in all.
+      hit_count: books were found of
+  alert:
+    success:
+      book_add: This book was successfully added.
+      book_delete: This book was successfully deleted.
+      book_update: This book was successfully updated.
+      lending_create: This book was successfully lent.
+      lending_delete: This book was successfully returned.
+    error:
+      book_add: Addition was failed.
+      book_delete: Deletion was failed.
+      book_update: 
+        rented_out: This book is already rented out.
+        other: Updating was failed. Please enter the data correctly.
+      lending_create:
+        rollback: Lending was failed. Please enter the user name correctly.
+        other: An error occurred while processing for lending.
+      lending_delete: This book is already returned.
+  button:
+    ok: OK
+    cancel: Cancel
+    search: Search
+    
 en-US:
   <<: *en
