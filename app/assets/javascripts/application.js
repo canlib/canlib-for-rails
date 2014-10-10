@@ -36,7 +36,7 @@ $(function() {
 	$("#lending-dialog-form").dialog({
 		autoOpen: false,
 		height: 300,
-		width: 350,
+		width: 400,
 		modal: true,
 		buttons: [{
 			text: I18n.ok_button,
@@ -81,6 +81,10 @@ $(function() {
 		$("#return_book").attr("action", "/books/" + $(this).attr("book_id") + "/lendings/" + $(this).attr("lending_id"));
 		$("#delete_book").attr("action", "/books/" + $(this).attr("book_id"));
 		$("#show_book").attr("action", "/books/" + $(this).attr("book_id") + "/edit");
+
+		$("dd.selected_book_title").text($(this).attr("book_title"));
+		$("dd.selected_book_author").text($(this).attr("book_author"));
+		$("dd.selected_book_user").text($(this).attr("lending_user"));
 	});
 
 
@@ -174,7 +178,25 @@ $(function() {
 
 	$("#update_button")
 		.click(function() {
-		$("#update-dialog-confirm").dialog("open");
+			var new_title = $.trim($("#book_title").val());
+			var new_author = $.trim($("#book_author_name").val());
+			if (new_title.length == 0 || new_author.length == 0) {
+				new_title = (new_title.length == 0)? "\0" : new_title;
+				new_author = (new_author.length == 0)? "\0" : new_author;
+
+				$("dd.edited_book_title").text(new_title);
+				$("dd.edited_book_author").text(new_author);
+				$("#update_ok_button").attr("disabled", true);
+				$("#update_ok_button").attr("class", "btn btn-primary");
+				$("p#update_confirm_message").text(I18n.update_alert);
+			} else {
+				$("dd.edited_book_title").text(new_title);
+				$("dd.edited_book_author").text(new_author);
+				$("#update_ok_button").removeAttr("disabled");
+				$("#update_ok_button").removeAttr("class").attr("class", "ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only");
+				$("p#update_confirm_message").text(I18n.update_notice);
+			}
+			$("#update-dialog-confirm").dialog("open");
 	});
 
 	$("#update-dialog-confirm").dialog({
@@ -183,6 +205,7 @@ $(function() {
 		width: 350,
 		modal: true,
 		buttons: [{
+			"id": "update_ok_button",
 			text: I18n.ok_button,
 			click: function() {
 				$("form.edit_book").submit();

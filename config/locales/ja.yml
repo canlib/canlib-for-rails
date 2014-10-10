@@ -45,6 +45,7 @@ ja:
       book_add: 書籍タイトルと著者名を入力してください
       book_delete: 削除します。よろしいですか？
       book_update: 更新します。よろしいですか？
+      data_empty: 未入力のデータがあります。確認してください
     check_length:
       min: は、
       between: "文字以上 "

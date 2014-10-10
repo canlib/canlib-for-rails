@@ -11,9 +11,14 @@
 	<% if @job == "lending" %>
 	<div id="lending-dialog-form" title=<%= @btn_name %>>
 		<p class="validateTips"><%= t 'dialog.confirm.lending' %></p>
-		<%= form_tag(book_lendings_path(1), method: "post", id: "lending_book", name: "user_name") do %>
-			<%= text_field_tag 'lending[user_name]', "", :maxlength => 25 %>
-		<% end %>	
+			<dl>
+				<%= form_tag(book_lendings_path(1), method: "post", id: "lending_book", name: "user_name") do %>
+				<dt class="input_label_dialog"><%= t 'lending.label.user_name' %></dt>
+				<dd class="input_value_dialog"><%= text_field_tag 'lending[user_name]', "", :maxlength => 25 %></dd>
+				<% end %>	
+				<dt class="selected_book_title"><%= t 'books.label.title' %></dt><dd class="selected_book_title"></dd>
+				<dt class="selected_book_author"><%= t 'books.label.author_name' %></dt><dd class="selected_book_author"></dd>
+			</dl>
 	</div>
 	<button id="lending_book_button" class="btn btn-primary" disabled><%= @btn_name %></button>
 	<% elsif @job == "return" %>
@@ -21,6 +26,11 @@
 		<p>
 			<span class="ui-icon ui-icon-alert"></span>
 			  <%= t 'dialog.confirm.return' %>	
+				<dl>
+				<dt class="selected_book_user"><%= t 'lending.label.user_name' %></dt><dd class="selected_book_user confirm"></dd>
+				<dt class="selected_book_title"><%= t 'books.label.title' %></dt><dd class="selected_book_title"></dd>
+				<dt class="selected_book_author"><%= t 'books.label.author_name' %></dt><dd class="selected_book_author"></dd>
+				</dl>
 			<%= form_tag(book_lending_path(1, 1), method: "delete", id: "return_book", name: "user_name") do %>
 			<% end %>
 		</p>
@@ -47,7 +57,7 @@
 				<% @books.each do |book| %>
 					<tr>
 						<% unless @job == "other" %>
-							<td class="selector"><input type="radio" name="book_select" book_id="<%= book.id %>" lending_id=<%= book.lending.id if book.lending.present? %>  /></td>
+							<td class="selector"><%= radio_add_params(book) %></td>
 						<% end %>
 						<td><%= book.title %></td>
 						<td><%= book.author_name %></td>

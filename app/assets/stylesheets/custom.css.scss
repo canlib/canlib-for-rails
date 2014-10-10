@@ -43,6 +43,10 @@ p {
 	line-height: 1.7em;
 }
 
+#update_confirm_message {
+	margin-top: -10px;
+}
+
 ul {
 	list-style-type: none;
 	margin: 0 0 0 0;
@@ -59,6 +63,11 @@ ul {
 
 .lending_info_list {
 	margin: 10px 0 10px 0;
+}
+
+.confirm {
+	color: red;
+	font-weight: bold;
 }
 
 /* header */
@@ -253,18 +262,16 @@ input[type="text"] {
 
 .input_label {
 	width: 130px;
-	font-weight: unset;
 	text-align: right;
 }
 
 .input_label_dialog {
 	text-align: right;
-	width: 80px;
-	font-weight: unset;
+	width: 110px;
 }
 
 .input_value_dialog {
-		margin-left: 80px;
+		margin-left: 110px;
 }
 
 
@@ -286,4 +293,37 @@ dt, dd {
 
 dt:after {
 	content: ":";
+}
+
+dt.selected_book_title,
+dt.selected_book_author,
+dt.selected_book_user,
+dt.edited_book_title,
+dt.edited_book_author {
+	width: 110px;
+	text-align: right;
+}
+
+dd.selected_book_title,
+dd.selected_book_author,
+dd.selected_book_user,
+dd.edited_book_title,
+dd.edited_book_author {
+	margin-left: 110px;
+}
+
+dd.selected_book_user,
+dd.edited_book_title {
+	margin-top: 16px;
+}
+
+dd.selected_book_title.confirm {
+		margin-top: 16px;
+}
+
+
+/* radio */
+
+input[type="radio"] {
+	margin-bottom: 4px;
 }
