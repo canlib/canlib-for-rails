@@ -24,7 +24,11 @@
   <div id="delete-dialog-confirm" title=<%= t 'books.btn_name.delete' %>>
 	  <p>
 		  <span class="ui-icon ui-icon-alert"></span>
-		  <%= t 'dialog.confirm.book_delete' %>	
+		  <%= t 'dialog.confirm.book_delete' %>
+			<dl>
+				<dt class="selected_book_title"><%= t 'books.label.title' %></dt><dd class="selected_book_title confirm"></dd>
+				<dt class="selected_book_author"><%= t 'books.label.author_name' %></dt><dd class="selected_book_author confirm"></dd>
+			</dl>
 		  <%= form_tag(book_path(1), method: "delete", id: "delete_book") do %>
 		  <% end %>
 	  </p>
@@ -44,7 +48,7 @@
   <tbody>
     <% @books.each do |book| %>
       <tr>
-				<td class="selector"><input type="radio" name="book_select" book_id="<%= book.id %>" lending_id=<%= book.lending.id if book.lending.present? %>  /></td>
+				<td class="selector"><%= radio_add_params(book) %></td>
         <td><%= book.title %></td>
         <td><%= book.author_name %></td>
       </tr>

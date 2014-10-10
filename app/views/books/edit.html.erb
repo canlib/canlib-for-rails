@@ -7,11 +7,15 @@
 		<p id="edit_book_error_message"><%= t 'message.edit_error' %></p>
 	<% end %>
 
-	<%= form_for(@book) do |f| %>
+	<%= form_for @book, :html => {:name => "edit_book_form"} do |f| %>
 			<div id="update-dialog-confirm" title=<%= t 'books.btn_name.edit' %>>
 				<p>
 					<span class="ui-icon ui-icon-alert"></span>
-					<%= t 'dialog.confirm.book_update' %>
+					<p id="update_confirm_message"><%= t 'dialog.confirm.book_update' %></p>
+					<dl>
+						<dt class="edited_book_title"><%= t 'books.label.title' %></dt><dd class="edited_book_title"><%= @book.title %></dd>
+						<dt class="edited_book_author"><%= t 'books.label.author_name' %></dt><dd class="edited_book_author"><%= @book.author_name %></dd>
+					</dl>
 				</p>
 			</div>
 

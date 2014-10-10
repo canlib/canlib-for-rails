@@ -45,6 +45,7 @@ en: &en
       book_add: Please input title and author name.
       book_delete: This book will be deleted. Are you quite sure?
       book_update: This book will be updated. Are you sure?
+      data_empty: The blank data is invalid. Please reenter.
     check_length:
       min: ": The number of characters is from "
       between: " to "
