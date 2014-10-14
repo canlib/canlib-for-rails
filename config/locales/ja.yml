@@ -55,8 +55,10 @@ ja:
   search:
     placeholder: タイトルを入力
     result:
-      all_count: 冊中、
-      hit_count: 冊の本が見つかりました
+      hit: &hit "タイトルに「%{word}」を含む書籍が、%{all}冊中、%{hit}冊見つかりました。"
+      hits: *hit
+      nothing: "タイトルに「%{word}」を含む書籍は見つかりませんでした。"
+    back: 一覧表示に戻す
   alert:
     success:
       book_add: 書籍を登録しました

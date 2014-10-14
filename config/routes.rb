@@ -5,7 +5,6 @@ Rails.application.routes.draw do
 	end
   resources :lendings, only: [:index]
 
-	match '/lendings/search', to: 'lendings#search', via: 'get'
 	root 'books#index'
 	match '*a', to: 'application#render_error', via: ['get', 'post']
 

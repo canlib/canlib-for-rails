@@ -98,30 +98,4 @@ describe LendingsController do
 			end
 		end		
 	end
-
-	describe "#search" do
-		let(:request) {get :search, params}
-
-		describe "when job is lending" do
-			let(:params) {{:search_string => "2", :job => "lending"}}
-
-			it "should be success" do
-				request
-				expect(response.status).to eq(200)
-				expect(response).to render_template("index")
-				expect(assigns[:books].size).to eq(Book.includes(:lending).where(:lendings => {:book_id => nil}).where("title like '%2%'").count)
-			end
-		end
-
-		describe "when job is return" do
-			let(:params) {{:search_string => "2", :job => "return"}}
-
-			it "should be success" do
-				request
-				expect(response.status).to eq(200)
-				expect(response).to render_template("index")
-				expect(assigns[:books].size).to eq(Book.joins(:lending).where("title like '%2%'").count)
-			end
-		end
-	end
 end

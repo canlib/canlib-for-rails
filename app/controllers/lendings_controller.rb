@@ -47,21 +47,6 @@ class LendingsController < ApplicationController
 		end
 	end
 
-	def search
-		@job = params[:job]
-		@title = t 'lending.title.' + @job
-		@btn_name = t 'lending.btn_name.' + @job
-		@books = case @job
-		when "lending"
-			Book.includes(:lending).where(:lendings => {:book_id => nil}).where("title LIKE ?", "%#{Book.escape_like(params[:search_string])}%").paginate(page: params[:page])
-		when "return"
-		  Book.joins(:lending).where("title LIKE ?", "%#{Book.escape_like(params[:search_string])}%").paginate(page: params[:page]).joins(:lending)
-		else
-			Book.where("title LIKE ?", "%#{Book.escape_like(params[:search_string])}%").paginate(page: params[:page])
-		end
-		render 'index'
-	end
-
 	private
 
     # Never trust parameters from the scary internet, only allow the white list through.

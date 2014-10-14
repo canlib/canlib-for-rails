@@ -55,8 +55,10 @@ en: &en
   search:
     placeholder: Enter the book title
     result:
-      all_count: books in all.
-      hit_count: books were found of
+      hit: '%{hit} book matching "%{word}" of %{all} books is found.'
+      hits: '%{hit} books matching "%{word}" of %{all} books are found.'
+      nothing: 'The book matching "%{word}" is not found.'
+    back: Go back to all books view.
   alert:
     success:
       book_add: This book was successfully added.
