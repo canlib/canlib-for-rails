@@ -2,8 +2,14 @@
 <div class="Left">
 	<h1><%= @title %></h1>
 
-	<%= form_tag(lendings_search_path, method: "get", id: "search_window", class: "search") do %>
-		<%= text_field_tag :search_string, "", :placeholder => (t 'search.placeholder'), :class => "text-box", :maxlength => 50 %>
+<% unless @search_string.nil? %>
+	<div class=search_result>
+		<%= @result %> <%= link_to((t 'search.back'), ("/lendings?job=" + @job)) %>
+	</div>
+<% end %>
+
+	<%= form_tag(books_search_path, method: "get", id: "search_window", class: "search") do %>
+		<%= text_field_tag :search_string, @search_string, :placeholder => (t 'search.placeholder'), :class => "text-box", :maxlength => 50 %>
 	  <%= submit_tag (t 'button.search'), :id => "search_button", :class => "btn", :name => nil %>
 		<%= hidden_field_tag :job, @job %>
 	<% end %>

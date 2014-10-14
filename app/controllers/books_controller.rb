@@ -1,7 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
-
   # GET /books
   # GET /books.json
   def index
@@ -71,12 +70,44 @@ class BooksController < ApplicationController
   end
 
 	def search
-		@title = t 'books.title'
-		@add_btn_name = t 'books.btn_name.add'
-		@show_btn_name = t 'books.btn_name.show'
-		@delete_btn_name = t 'books.btn_name.delete'
-		@books = Book.where("title LIKE ?", "%#{Book.escape_like(params[:search_string])}%").paginate(page: params[:page])
-		render :index
+		@search_string = params[:search_string]
+		@job = case params[:job]
+		when "lending", "return"
+			params[:job]
+		when nil
+			nil
+		else
+			"other"
+		end
+		@title = @job.nil? ? (t 'books.title') : (t 'lending.title.' + @job)
+
+		@all_books = case @job
+		when "lending"
+			Book.includes(:lending).where(:lendings => {:book_id => nil})
+		when "return"
+			Book.joins(:lending)
+		else
+			Book.all
+		end
+		@books = @all_books.where("title LIKE ?", "%#{Book.escape_like(params[:search_string])}%").paginate(page: params[:page])
+
+		if @all_books.count == 0 || @books.count == 0
+			@result = t 'search.result.nothing', :word => @search_string
+		elsif @books.count == 1
+			@result = t 'search.result.hit', :hit => "1", :all => @all_books.count.to_s, :word => @search_string
+		else
+			@result = t 'search.result.hits', :hit => @books.count.to_s, :all => @all_books.count.to_s, :word => @search_string
+		end
+
+		if @job.nil?
+			@add_btn_name = t 'books.btn_name.add'
+			@show_btn_name = t 'books.btn_name.show'
+			@delete_btn_name = t 'books.btn_name.delete'
+			render 'books/index' 
+		else
+			@btn_name = t 'lending.btn_name.' + @job
+			render 'lendings/index'
+		end
 	end
 
   private

@@ -1,10 +1,17 @@
 <% provide(:title, (t 'books.title.index')) %>
 <h1><%= t 'books.title.index'%></h1>
 
+<% unless @search_string.nil? %>
+	<div class=search_result>
+		<%= @result %> <%= link_to((t 'search.back'),root_path) %>
+	</div>
+<% end %>
+
 <%= form_tag(books_search_path, method: "get", id: "search_window", class: "search") do %>
-	<%= text_field_tag :search_string, "", :placeholder => (t 'search.placeholder'), :class => "text-box", :maxlength => 50 %>
+	<%= text_field_tag :search_string, @search_string, :placeholder => (t 'search.placeholder'), :class => "text-box", :maxlength => 50 %>
   <%= submit_tag (t 'button.search'), :id => "search_button", :class => "btn", :name => nil %>
 <% end %>
+
 <div id="button_set">
   <div id="add-book-dialog-form" title=<%= t 'books.btn_name.add' %>>
     <p class="validateTips"><%= t 'dialog.confirm.book_add' %></p>
