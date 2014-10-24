@@ -1,0 +1,38 @@
+<% provide(:title, (t 'app_name')) %>
+
+<div id="top" data-role="content" data-theme="a">
+	<a href="#home" id="pagetop" data-ajax="false" class="ui-btn ui-btn-icon-notext ui-icon-caret-up">ページ先頭へ戻る</a>
+
+	<div data-role="fieldcontain">
+	<fieldset data-role="controlgroup" id="books_controlgroup">
+	<ul id="books_index" class="ui-listview" data-filter=true data-role="listview">
+	<% Book.all.each do |book| %>
+			<% if book.lending.present? %>
+			<a name="link_show_rented" href=<%= book_path(id: book.id, view: "m") %> class="ui-btn">
+			<li name="book_rented_out" class="ui-li ui-li-static ui-body-c book-list" data-icon="false">
+				<h3 class="ui-li-heading ui-icon-book book-title-icon"><%= book.title %></h3>
+				<p class="ui-li-desc ui-icon-pencil book-author-icon"><%= book.author_name %></p>
+				<p id="book_status_rented_out" class="ui-li-aside ui-li-desc"><%= t 'lending.status.rented_out' %></p>
+				<hr />
+				<p class="ui-li-desc ui-icon-user lending-user-icon"><%= book.lending.user_name %></p>
+				<p class="ui-li-desc ui-icon-check lending-date-icon"><%= book.lending.date %></p>
+				<p class="ui-li-desc ui-icon-clock lending-limit-icon"><%= book.lending.date + book.lending.period %></p>
+			</li>
+			</a>
+			<% else %>
+			<a name="link_show_kept" href=<%= book_path(id: book.id, view: "m") %> class="ui-btn">
+			<li name="book_kept" class="ui-li ui-li-static ui-body-c book-list">
+				<h3 class="ui-li-heading ui-icon-book book-title-icon"><%= book.title %></h3>
+				<p class="ui-li-desc ui-icon-pencil book-author-icon"><%= book.author_name %></p>
+				<p id="book_status_kept" class="ui-li-aside ui-li-desc"><%= t 'lending.status.kept' %></p>
+			</li>
+			</a>
+			<% end %>
+	<% end %>
+	</ul>
+	</fieldset>
+	</div>
+</div>
+
+
+

@@ -9,11 +9,24 @@ class BooksController < ApplicationController
 		@add_btn_name = t 'books.btn_name.add'
 		@show_btn_name = t 'books.btn_name.show'
 		@delete_btn_name = t 'books.btn_name.delete'
+
+		case params[:view]
+		when "m"
+			render "index_m", :layout => "application_m"
+		else
+			render :index
+		end
   end
 
   # GET /books/1
   # GET /books/1.json
   def show
+		case params[:view]
+		when "m"
+			render "show_m", :layout => "application_m"
+		else
+			render :show
+		end
   end
 
   # GET /books/new
@@ -32,7 +45,14 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to_back(books_path, notice: (t 'alert.success.book_add')) }
+        format.html {	
+					case params[:view]
+					when "m"
+						redirect_to_back(books_path, notice: (t 'alert.success.book_add'))
+					else
+						redirect_to_back(books_path, notice: (t 'alert.success.book_add'))
+					end
+				}
         format.json { render :show, status: :created, location: @book }
       else
         format.html { redirect_to_back(books_path, alert: (t 'alert.error.book_add')) }
@@ -103,11 +123,22 @@ class BooksController < ApplicationController
 			@add_btn_name = t 'books.btn_name.add'
 			@show_btn_name = t 'books.btn_name.show'
 			@delete_btn_name = t 'books.btn_name.delete'
-			render 'books/index' 
+			case params[:view]
+			when "m"
+				render "books/index_m", :layout => "application_m"
+			else
+				render 'books/index' 
+			end
 		else
 			@btn_name = t 'lending.btn_name.' + @job
-			render 'lendings/index'
+			case params[:view]
+			when "m"
+				render "lendings/index_m", :layout => "application_m"
+			else
+				render 'lendings/index'
+			end
 		end
+
 	end
 
   private

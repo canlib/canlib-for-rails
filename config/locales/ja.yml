@@ -24,6 +24,9 @@ ja:
       rented_out: 貸出中
       kept: 保管中
   books:
+    menu:
+      header: 操作メニュー
+      content: 操作を選択してください
     title:
       index: 蔵書一覧
       detail: 書籍詳細

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= full_title(yield(:title)) %></title>
+	<%= stylesheet_link_tag 'mobile/application' %>
+	<%= stylesheet_link_tag	'http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css' %>
+  <%= csrf_meta_tags %>
+	<%= render 'layouts/shim' %>
+</head>
+<body>
+	<%= javascript_include_tag 'http://code.jquery.com/jquery-1.11.1.min.js' %>
+	<%= javascript_include_tag 'jquery.mobile.config' %>
+	<%= javascript_include_tag 'http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js' %>
+	<%= javascript_include_tag 'mobile/application' %>
+	<div data-role="page" id="home" data-theme="a">
+		<div data-role="header" data-theme="b">
+			<a href=<%= root_path(view: "m") %> class="ui-btn ui-icon-home ui-btn-icon-notext ui-corner-all ui-btn-left"></a>
+			<a id="back_btn" href="#" class="ui-btn ui-icon-back ui-btn-icon-notext ui-corner-all" data-rel="back"></a>
+			<%= image_tag("logo.png", id: "logo")  %>
+			<a href="#popup_add_book" data-rel="dialog" data-transition="pop" id="add_book_btn" class="ui-btn ui-icon-plus ui-btn-icon-notext ui-corner-all ui-btn-right"></a>
+		</div>
+		<% flash.each do |name, msg| %>
+		<%=	msg %>
+		<% end %>
+		<%= yield %>
+	</div>
+	<!-- ダイアログページ（書籍追加） -->
+	<div data-role="dialog" id="popup_add_book" data-close-btn="right">
+		<div data-role="header">
+			<h1><%= t 'books.btn_name.add' %></h1>
+		</div>
+		<div data-role="content">
+			<p class="validateTips"><%= t 'dialog.confirm.book_add' %></p>
+			<%= form_tag(books_path(view: "m"), method: "post", id: "add_book", name: "book_data") do %>
+				<%= label :book, :title, (t 'books.label.title')  %>
+				<%= text_field_tag 'book[title]', "", :maxlength => 50 %>
+				<%= label :book, :author_name, (t 'books.label.author_name') %>
+				<%= text_field_tag 'book[author_name]', "", :maxlength => 30 %>
+				<%= submit_tag (t 'books.btn_name.add') %>
+			<% end %>	
+		</div>
+	</div>
+	<!-- ダイアログページ（保管中書籍） -->
+	<div data-role="dialog" id="popup_kept" data-close-btn="right">
+		<div data-role="header">
+			<h1><%= t 'books.menu.header' %></h1>
+		</div>
+
+		<div data-role="content">
+			<p><%= t 'books.menu.content' %></p>
+			<a href="#" data-rel="back" data-role="button"><%= t 'books.btn_name.edit'%></a>
+			<a href="#" data-rel="back" data-role="button"><%= t 'lending.btn_name.lending'%></a>
+		</div>
+	</div>
+	<!-- ダイアログページ（貸出中書籍） -->
+	<div data-role="dialog" id="popup_rented_out" data-close-btn="right">
+		<div data-role="header">
+			<h1><%= t 'books.menu.header' %></h1>
+		</div>
+
+		<div data-role="content">
+			<p><%= t 'books.menu.content' %></p>
+			<a href="#" data-rel="back" data-role="button"><%= t 'books.btn_name.edit'%></a>
+			<a href="#" data-rel="back" data-role="button"><%= t 'lending.btn_name.return'%></a>
+		</div>
+	</div>
+</body>
+</html>

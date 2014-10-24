@@ -24,6 +24,9 @@ en: &en
       rented_out: rented out
       kept: kept
   books:
+    menu:
+      header: Menu
+      content: Select action.
     title:
       index: Books Information
       detail: Book Detail Information

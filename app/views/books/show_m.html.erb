@@ -1,0 +1,18 @@
+<% provide(:title, @book.title) %>
+
+<div id="top" data-role="content" data-theme="a">
+	<h2><%= t 'books.title.detail' %></h2>
+	<dl>
+		<dt><%= t 'books.label.title' %></dt><dd><%= @book.title %></dd>
+		<dt><%= t 'books.label.author_name' %></dt><dd><%= @book.author_name %></dd>
+		<% if @book.lending.present? %>
+		<dt><%= t 'lending.label.user_name' %></dt><dd><%= @book.lending.user_name %></dd>
+		<dt><%= t 'lending.label.date' %></dt><dd><%= @book.lending.date %></dd>
+		<dt><%= t 'lending.label.limit' %></dt><dd><%= @book.lending.date + @book.lending.period %></dd>
+		<% else %>
+		<dt><%= t 'lending.label.user_name' %></dt><dd></dd>
+		<dt><%= t 'lending.label.date' %></dt><dd></dd>
+		<dt><%= t 'lending.label.limit' %></dt><dd></dd>
+		<% end %>
+	</dl>
+</div>

@@ -1,0 +1,163 @@
+/* body */
+
+.ui-body-a {
+	margin: 0px auto;
+}
+
+.ui-field-contain {
+	overflow-y: hidden !important;
+}
+
+.ui-controlgroup-controls {
+	width: 100% !important;
+}
+
+#top {
+	border-width: 0px;
+	padding: unset;
+}
+
+/* listview */
+
+.ui-listview {
+	margin: 0px !important;
+	
+	.ui-li-aside {
+		right: 2em !important;
+	}
+}
+
+.book-list {
+	font-weight: normal;
+}
+
+#book_status_kept {
+	color: green;
+}
+
+#book_status_rented_out {
+	color: red;
+}
+
+.ui-controlgroup-controls .ui-btn-icon-notext {
+	padding: 0px 10px 10px 20px !important;
+}
+
+.ui-icon-clock:after {
+	background-repeat: no-repeat;
+}
+
+.book-title-icon:after,
+.book-author-icon:after,
+.lending-user-icon:after,
+.lending-date-icon:after,
+.lending-limit-icon:after {
+	content: "";
+	position: absolute;
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	float: left;
+	left: 2px;
+	background-color: #aaa;
+	background-position: center;
+	background-size: 10px 10px;
+	margin: -2px 22px;
+	border-radius: 5px;
+}
+
+/* typography */
+
+li > h3, li > p {
+	text-align: left;
+	height: 25px;
+	font-size: 85%;
+	margin-left: 33px;
+	letter-spacing: 1px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+h3 {
+	margin-top: 25px;
+}
+
+h2 {
+	margin-left: 20px;
+}
+
+/* search */
+
+.ui-input-search {
+	margin: 10px !important;
+}
+
+/* hr */
+
+hr {
+	height: 10px;
+	border-width: 1px 0px 0px;
+	border-style: dashed none none;
+	border-color: #d3d3d3;
+}
+
+/* logo */
+
+#logo {
+	display: block;
+	margin: -45px auto 0 auto;	
+	width: 150px;
+}
+
+/* pagetop */
+
+#pagetop {
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	z-index: 2;
+	border: 1px solid lightgray;
+	border-radius: 20px;
+}
+
+#pagetop:after {
+	background-size: 20px 20px;
+	background-position: 5px -1px;
+}
+
+/* link */
+
+a {
+	outline: none;
+	text-decoration: none;
+	color: black !important;
+}
+
+/* definition list */
+
+dl {
+	margin: 0 10px 0 10px;
+}
+
+dt {
+	font-weight: bold;
+	float: left;
+	clear: both;
+	width: 100px;
+}
+
+
+dt, dd {
+	margin-bottom: 10px;
+	height: 40px;
+	overflow: auto;
+}
+
+/* back button */
+
+#back_btn {
+	position: relative;
+	left: 40px;
+	top: -3px;
+}
