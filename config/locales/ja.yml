@@ -24,17 +24,16 @@ ja:
       rented_out: 貸出中
       kept: 保管中
   books:
-    menu:
-      header: 操作メニュー
-      content: 操作を選択してください
     title:
       index: 蔵書一覧
       detail: 書籍詳細
+      edit: 書籍情報編集
     btn_name:
       add: 書籍を登録する
       show: 書籍情報を確認・編集する
-      delete: 書籍を削除する
-      edit: 書籍情報を更新する
+      delete: 削除する
+      edit: 編集する
+      update: 更新する
     label:
       title: 書籍タイトル
       author_name: 著者名
@@ -55,12 +54,15 @@ ja:
       max: 文字以下で登録してください
   message:
     edit_error: 貸出中のため、書籍情報を変更できません
+    read:
+      end: 最終ページまで読み込みました。これ以上は読み込むことができません。
+      fail: ページの読み込みに失敗しました。再読み込みしてください。
   search:
-    placeholder: タイトルを入力
+    placeholder: タイトルまたは著者名を入力
     result:
-      hit: &hit "タイトルに「%{word}」を含む書籍が、%{all}冊中、%{hit}冊見つかりました。"
+      hit: &hit "タイトルまたは著者名に「%{word}」を含む書籍が、%{all}冊中、%{hit}冊見つかりました。"
       hits: *hit
-      nothing: "タイトルに「%{word}」を含む書籍は見つかりませんでした。"
+      nothing: "タイトルまたは著者名に「%{word}」を含む書籍は見つかりませんでした。"
     back: 一覧表示に戻す
   alert:
     success:
@@ -83,3 +85,4 @@ ja:
     ok: OK
     cancel: キャンセル
     search: 検索
+  pagetop: PAGE TOP

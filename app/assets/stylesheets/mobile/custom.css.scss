@@ -1,11 +1,17 @@
 /* body */
 
+#top {
+	padding: 0px !important;
+}
+
 .ui-body-a {
 	margin: 0px auto;
 }
 
 .ui-field-contain {
 	overflow-y: hidden !important;
+	padding: 0px !important;
+	margin: 0px !important;
 }
 
 .ui-controlgroup-controls {
@@ -48,49 +54,89 @@
 }
 
 .book-title-icon:after,
-.book-author-icon:after,
 .lending-user-icon:after,
 .lending-date-icon:after,
 .lending-limit-icon:after {
 	content: "";
-	position: absolute;
-	display: inline-block;
-	width: 20px;
-	height: 20px;
-	float: left;
-	left: 2px;
+	width: 14px;
+	height: 14px;
+	border-radius: 5px;
 	background-color: #aaa;
 	background-position: center;
 	background-size: 10px 10px;
-	margin: -2px 22px;
+	position: absolute;
+	display: inline-block;
+	float: left;
+	left: 2px;
+	margin: 1px 10px;
+}
+
+.book-author-icon:after {
+	content: "";
+	width: 14px;
+	height: 14px;
 	border-radius: 5px;
+	background-color: #aaa;
+	background-position: center;
+	background-size: 10px 10px;
+	position: absolute;
+	display: inline-block;
+	float: left;
+	left: 0px;
+	margin: 2px 65%;
+
 }
 
 /* typography */
 
-li > h3, li > p {
+#page_title {
+	margin: -10px;
+}
+
+.book-title, .book-author {
 	text-align: left;
-	height: 25px;
-	font-size: 85%;
-	margin-left: 33px;
-	letter-spacing: 1px;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+	margin: 0 0 0 17px;
+	font-size: 90%;
 }
 
-h3 {
-	margin-top: 25px;
+.book-title {
+	width: 55%;
+	float: left;
+	margin-right: 10%;
+}
+
+.book-author {
+	width: 20%;
+	padding-left: 8px;
+}
+
+.book-status {
+	text-align: left;
+	margin-bottom: 3px;
+	font-size: 90%;
+}
+
+.lending-info {
+	text-align: left;
+	float: left;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	display: inline-block;
+	width: 90%;
+	margin: 0 0 0 17px;
+	font-size: 70%;
+}
+
+.confirm {
+	color: red;
 }
 
 h2 {
 	margin-left: 20px;
-}
-
-/* search */
-
-.ui-input-search {
-	margin: 10px !important;
 }
 
 /* hr */
@@ -102,19 +148,36 @@ hr {
 	border-color: #d3d3d3;
 }
 
-/* logo */
+/* header */
 
 #logo {
 	display: block;
-	margin: -45px auto 0 auto;	
-	width: 150px;
+	margin: -11px -93px -8px -15px;	
+	width: 112px;
 }
+
+#logo_link {
+	top: 6px;
+	background-color: #1d1d1d;
+}
+
+.ui-header {
+	padding: 10px !important;
+}
+
+/* footer */
+
+.ui-footer {
+	padding: 10px;
+	height: 50px;
+}
+
 
 /* pagetop */
 
 #pagetop {
 	position: fixed;
-	bottom: 10px;
+	bottom: 30px;
 	right: 10px;
 	z-index: 2;
 	border: 1px solid lightgray;
@@ -131,7 +194,6 @@ hr {
 a {
 	outline: none;
 	text-decoration: none;
-	color: black !important;
 }
 
 /* definition list */
@@ -142,22 +204,70 @@ dl {
 
 dt {
 	font-weight: bold;
-	float: left;
-	clear: both;
 	width: 100px;
 }
 
 
 dt, dd {
 	margin-bottom: 10px;
-	height: 40px;
 	overflow: auto;
+	word-break: break-all;
 }
 
-/* back button */
+
+/* button */
 
 #back_btn {
 	position: relative;
 	left: 40px;
 	top: -3px;
+}
+
+#search_button {
+	width: 100%;
+}
+
+.cancel-btn {
+	width: auto !important;
+	float: right;
+	margin: 10px 0 0 10px !important;
+}
+
+.close-btn {
+	width: auto !important;
+	margin: 0 auto !important;
+}
+
+#update_submit_btn,
+#add_submit_btn,
+#lending_submit_btn,
+#return_submit_btn,
+#delete_submit_btn {
+	width: auto;
+	height: 36px;
+	float: right;
+	margin: 10px 0 0 10px;
+	
+}
+
+.ui-grid-a {
+	margin: 10px 0;
+}
+
+/* flash */
+
+.search_result,
+#flash_message {
+	word-break: break-all;
+	padding: 10px;
+	margin: 10px;
+}
+
+.flash_alert {
+	color: darkred;
+}
+
+.search_result,
+.flash_notice {
+	color: darkgreen;
 }

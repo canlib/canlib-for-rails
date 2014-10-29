@@ -1,7 +1,20 @@
 <% provide(:title, @book.title) %>
 
-<div id="top" data-role="content" data-theme="a">
-	<h2><%= t 'books.title.detail' %></h2>
+<div data-role="content" data-theme="a">
+	<div class="ui-grid-a">
+		<div class="ui-block-a">
+			<%= link_to (t 'books.btn_name.edit'), edit_book_path(@book, view: "m"), :name => "edit_book_link", "data-role" => "button" %>
+		</div>
+		<% if @book.lending.present? %>
+			<div class="ui-block-b">
+				<%= link_to (t 'lending.btn_name.return'), "#return_dialog", :name => "return_book_link", "data-role" => "button" %>
+			</div>
+		<% else %>
+			<div class="ui-block-b">
+				<%= link_to (t 'lending.btn_name.lending'), "#lending_dialog", :name => "lending_book_link", "data-role" => "button" %>
+			</div>
+		<% end %>
+	</div>
 	<dl>
 		<dt><%= t 'books.label.title' %></dt><dd><%= @book.title %></dd>
 		<dt><%= t 'books.label.author_name' %></dt><dd><%= @book.author_name %></dd>
@@ -16,3 +29,5 @@
 		<% end %>
 	</dl>
 </div>
+
+

@@ -2,7 +2,7 @@
 <h1><%= t 'books.title.detail' %></h1>
 
 	<% unless @book.lending.present? %>
-		<button id="update_button" class="btn btn-primary"><%= t 'books.btn_name.edit' %></button>	
+		<button id="update_button" class="btn btn-primary"><%= t 'books.btn_name.update' %></button>	
 	<% else %>
 		<p id="edit_book_error_message"><%= t 'message.edit_error' %></p>
 	<% end %>

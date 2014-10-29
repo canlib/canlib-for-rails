@@ -1,3 +1,8 @@
-<div data-role="header">
-		<%= link_to image_tag("logo.png", alt: (t 'app_name')), root_path(view: "m"), id: "logo", class: "ui-btn ui-corner-all" %>
+<div data-role="header" data-theme="b">
+	<a id="logo_link" href=<%= root_path(view: "m") %> class="ui-btn ui-btn-left ">
+		<%= image_tag("logo.png", id: "logo")  %>
+	</a>
+	<h3 id="page_title"><%= @page_title %></h3>
+	<a href="#add_book_dialog" id="add_book_btn" class="ui-btn ui-icon-plus ui-btn-icon-notext ui-corner-all ui-btn-right">
+	</a>
 </div>
