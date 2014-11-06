@@ -1,0 +1,69 @@
+<% provide(:title) %>
+
+<div id="top" data-role="content" data-theme="a">
+	<%= link_to (t 'pagetop'), "#home", :id => "pagetop", :class => "ui-btn ui-btn-icon-left ui-icon-caret-up", "data-ajax" => "false" %>
+
+	<% unless @search_string.nil? %>
+		<div class="search_result">
+			<%= @result %> <%= link_to((t 'search.back'),root_path(view: "m")) %>
+		</div>
+	<% end %>
+
+	<%= form_tag(books_search_path, method: "get", id: "search_form") do %>
+		<%= hidden_field_tag "view", "m" %>
+		<input type="search" id="search" name="search_string" value="<%= @search_string %>" placeholder=<%= t 'search.placeholder' %> maxlength=50 />
+		<%= submit_tag (t 'button.search'), :id => "search_button", :name => nil, :class => "ui-btn ui-corner-all ui-shadow ui-disabled", "data-role" => "none" %>
+	<% end %>
+
+	<div data-role="fieldcontain">
+	<fieldset data-role="controlgroup" id="books_controlgroup">
+	<ul id="books_index" class="ui-listview" data-role="listview">
+	<% @books.each do |book| %>
+			<% if book.lending.present? %>
+			<a page_num=<%= @books.current_page %> name="each_book_link" href=<%= book_path(id: book.id, view: "m") %> class="book-link ui-btn">
+			<li book_id=<%= book.id %> lending_id=<%= book.lending.id %> name="book_rented_out" class="ui-li ui-li-static ui-body-c book-list" data-icon="false">
+				<h3 class="book-title ui-li-heading"><%= book.title %></h3>
+				<dl>
+				<dt class="book-info"><%= image_tag("icon/pencil.png", :alt => (t 'books.label.author_name'), :title => (t 'books.label.author_name'), :class => "book-author-icon") %></dt>
+				<dd class="book-info book-author ui-li-desc"><%= book.author_name %></dd>
+				<dt class="book-info"><%= image_tag("icon/heart.png", :alt => (t 'books.table_header.status'), :title => (t 'books.table_header.status'), :class => "book-status-icon") %></dt>
+				<dd id="book_status_rented_out" class="book-info book-status ui-li-desc"><%= t 'lending.status.rented_out' %></dd>
+				<dt class="book-info"><%= image_tag("icon/clock-o.png", :alt => (t 'lending.label.limit'), :title => (t 'lending.label.limit'), :class => "lending-limit-icon") %></dt>
+				<dd class="book-info lending-limit ui-li-desc"><%= (book.lending.date + book.lending.period).to_s %></dd>
+				</dl>
+			</li>
+			</a>
+			<% else %>
+			<a page_num=<%= @books.current_page %> name="each_book_link" href=<%= book_path(id: book.id, view: "m") %> class="book-link ui-btn">
+			<li book_id=<%= book.id %> name="book_kept" class="ui-li ui-li-static ui-body-c book-list">
+				<h3 class="book-title ui-li-heading"><%= book.title %></h3>
+				<dl>
+				<dt class="book-info"><%= image_tag("icon/pencil.png", :alt => (t 'books.label.author_name'), :title => (t 'books.label.author_name'), :class => "book-author-icon") %></dt>
+				<dd class="book-info book-author ui-li-desc"><%= book.author_name %></dd>
+				<dt class="book-info"><%= image_tag("icon/heart.png", :alt => (t 'books.table_header.status'), :title => (t 'books.table_header.status'), :class => "book-status-icon") %></dt>
+				<dd id="book_status_kept" class="book-info book-status ui-li-desc"><%= t 'lending.status.kept' %></dd>
+				</dl>
+			</li>
+			</a>
+			<% end %>
+	<% end %>
+	</ul>
+	</fieldset>
+	</div>
+
+	<div data-role="popup" id="end_read_dialog">
+		<div data-role="content">
+			<p><%= t 'message.read.end' %></p>
+			<button name="close_btn" class="close-btn"><%= t 'button.ok' %></button>
+		</div>
+	</div>
+
+	<div data-role="popup" id="fail_read_dialog">
+		<div data-role="content">
+			<p><%= t 'message.read.fail' %></p>
+			<button name="close_btn" class="close-btn"><%= t 'button.ok' %></button>
+		</div>
+	</div>
+
+	<div hidden=true id="hidden_info" search="<%= @search_string.nil? ? nil : true %>" next=<%= @books.next_page %>></div>
+</div>

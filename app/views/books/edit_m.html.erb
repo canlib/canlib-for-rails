@@ -1,0 +1,27 @@
+<% provide(:title) %>
+<div data-role="content" data-theme="a">
+	<%= form_for @book, :url => {:action => 'update', :view => "m"}  do |f| %>
+		<% if @book.errors.any? %>
+			<div id="error_explanation">
+				<h2><%= pluralize(@book.errors.count, "error") %>prohibited this book from being saved:</h2>
+				<ul id="edit_form_error_msg">
+					<% @book.errors.full_messages.each do |message| %>
+						<li><%= message %></li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+		<%= f.label :title, (t 'books.label.title') %>
+		<%= f.text_field :title, :maxlength => 50, :id => "edited_title", "autocomplete" => "off" %>
+  	<%= f.label :author_name, (t 'books.label.author_name') %>
+		<%= f.text_field :author_name, :maxlength => 30, :id => "edited_author", "autocomplete" => "off" %>
+	<% end %>
+	<div class="ui-grid-a">
+		<div class="ui-block-a">
+			<%= link_to (t 'books.btn_name.delete'), "#delete_dialog", :id => "delete_dialog_btn", "data-role" => "button", "data-theme" => "b" %>
+		</div>
+		<div class="ui-block-b">
+			<%= link_to (t 'books.btn_name.update'), "#update_dialog", :id => "update_dialog_btn", "data-role" => "button" %>
+		</div>
+	</div>
+</div>

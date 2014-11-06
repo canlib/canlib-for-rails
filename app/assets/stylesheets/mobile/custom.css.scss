@@ -1,0 +1,279 @@
+/* body */
+
+#top {
+	padding: 0px !important;
+}
+
+.ui-body-a {
+	margin: 0px auto;
+}
+
+.ui-field-contain {
+	overflow-y: hidden !important;
+	padding: 0px !important;
+	margin: 0px !important;
+}
+
+.ui-controlgroup-controls {
+	width: 100% !important;
+}
+
+#top {
+	border-width: 0px;
+	padding: unset;
+}
+
+/* listview */
+
+.ui-listview {
+	margin: 0px !important;
+	
+	.ui-li-aside {
+		right: 2em !important;
+	}
+}
+
+.book-list {
+	font-weight: normal;
+}
+
+#book_status_kept {
+	color: green;
+}
+
+#book_status_rented_out {
+	color: red;
+}
+
+.ui-controlgroup-controls .ui-btn-icon-notext {
+	padding: 0px 10px 10px 20px !important;
+}
+
+/* typography */
+
+#page_title {
+	margin: -10px;
+}
+
+.book-title {
+	text-align: left;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-size: 90%;
+	margin: 0px;
+}
+
+.book-author {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	max-width: 50%;
+}
+
+.lending-user {
+	max-width: 20%;
+}
+
+.lending-user,
+.lending-limit {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.book-info {
+	font-size: 80%;
+	text-align: left;
+	display: inline-block;
+	float: left;
+}
+
+.confirm {
+	color: red;
+}
+
+.out-of-dateness {
+	text-shadow: 0 0 1px red;
+}
+
+h2 {
+	margin-left: 20px;
+}
+
+/* hr */
+
+hr {
+	height: 10px;
+	border-width: 1px 0px 0px;
+	border-style: dashed none none;
+	border-color: #d3d3d3;
+}
+
+/* header */
+
+#logo {
+	display: block;
+	margin: -11px -93px -8px -15px;	
+	width: 112px;
+}
+
+#logo_link {
+	top: 6px;
+	background-color: #1d1d1d;
+}
+
+.ui-header {
+	padding: 10px !important;
+}
+
+/* footer */
+
+.ui-footer {
+	padding: 10px;
+	height: 50px;
+}
+
+
+/* pagetop */
+
+#pagetop {
+	position: fixed;
+	bottom: 30px;
+	right: 10px;
+	z-index: 2;
+	border: 1px solid lightgray;
+	border-radius: 20px;
+}
+
+#pagetop:after {
+	background-size: 20px 20px;
+	background-position: 5px -1px;
+}
+
+/* link */
+
+a {
+	outline: none;
+	text-decoration: none;
+}
+
+.book-link {
+	padding: 5px !important;
+}
+
+/* definition list */
+
+dl.show-detail {
+	margin: 0 10px 0 10px;
+}
+
+dt.show-detail,
+dt.delete_book_title,
+dt.delete_book_author,
+dt.edited_book_title,
+dt.edited_book_author {
+	font-weight: bold;
+	width: 100px;
+}
+
+
+dt.show-detail,
+dd.show-detail,
+dt.delete_book_title,
+dd.selected_book_author,
+dd.selected_book_title,
+dt.edited_book_title,
+dd.edited_book_title,
+dt.edited_book_author,
+dd.edited_book_author {
+	margin-bottom: 10px;
+	overflow: auto;
+	word-break: break-all;
+}
+
+dt.book-info {
+	float: left;
+	width: 16px;
+	height: 16px;
+	background-color: #ccc;
+	border-radius: 3px;
+}
+
+dl {
+	margin-top: 0px;
+}
+
+dd.book-info {
+	margin: 0 10px 0 2px;
+}
+
+/* button */
+
+#back_btn {
+	position: relative;
+	left: 40px;
+	top: -3px;
+}
+
+#search_button {
+	width: 100%;
+}
+
+.cancel-btn {
+	width: auto !important;
+	float: right;
+	margin: 10px 0 0 10px !important;
+}
+
+.close-btn {
+	width: auto !important;
+	margin: 0 auto !important;
+}
+
+#update_submit_btn,
+#add_submit_btn,
+#lending_submit_btn,
+#return_submit_btn,
+#delete_submit_btn {
+	width: auto;
+	height: 36px;
+	float: right;
+	margin: 10px 0 0 10px;
+	
+}
+
+.ui-grid-a {
+	margin: 10px 0;
+}
+
+/* flash */
+
+.search_result,
+#flash_message {
+	word-break: break-all;
+	padding: 10px;
+	margin: 10px;
+}
+
+.flash_alert {
+	color: darkred;
+}
+
+.search_result,
+.flash_notice {
+	color: darkgreen;
+}
+
+/* icon */
+
+
+.book-author-icon,
+.book-status-icon,
+.lending-user-icon,
+.lending-limit-icon {
+	display: inline-block;
+	float: left;
+	width: 12px;
+	padding: 2px 0 0 2px;
+}

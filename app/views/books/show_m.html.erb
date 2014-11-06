@@ -1,0 +1,33 @@
+<% provide(:title, @book.title) %>
+
+<div data-role="content" data-theme="a">
+	<div class="ui-grid-a">
+		<div class="ui-block-a">
+			<%= link_to (t 'books.btn_name.edit'), edit_book_path(@book, view: "m"), :name => "edit_book_link", "data-role" => "button" %>
+		</div>
+		<% if @book.lending.present? %>
+			<div class="ui-block-b">
+				<%= link_to (t 'lending.btn_name.return'), "#return_dialog", :name => "return_book_link", "data-role" => "button" %>
+			</div>
+		<% else %>
+			<div class="ui-block-b">
+				<%= link_to (t 'lending.btn_name.lending'), "#lending_dialog", :name => "lending_book_link", "data-role" => "button" %>
+			</div>
+		<% end %>
+	</div>
+	<dl class="show-detail">
+		<dt class="show-detail"><%= t 'books.label.title' %></dt><dd class="show-detail"><%= @book.title %></dd>
+		<dt class="show-detail"><%= t 'books.label.author_name' %></dt><dd class="show-detail"><%= @book.author_name %></dd>
+		<% if @book.lending.present? %>
+		<dt class="show-detail"><%= t 'lending.label.user_name' %></dt><dd class="show-detail"><%= @book.lending.user_name %></dd>
+		<dt class="show-detail"><%= t 'lending.label.date' %></dt><dd class="show-detail"><%= @book.lending.date %></dd>
+		<dt class="show-detail"><%= t 'lending.label.limit' %></dt><dd class="show-detail"><%= @book.lending.date + @book.lending.period %></dd>
+		<% else %>
+		<dt class="show-detail"><%= t 'lending.label.user_name' %></dt><dd class="show-detail"></dd>
+		<dt class="show-detail"><%= t 'lending.label.date' %></dt><dd class="show-detail"></dd>
+		<dt class="show-detail"><%= t 'lending.label.limit' %></dt><dd class="show-detail"></dd>
+		<% end %>
+	</dl>
+</div>
+
+

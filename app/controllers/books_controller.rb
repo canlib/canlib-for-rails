@@ -4,16 +4,30 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.paginate(page: params[:page])
-		@title = t 'books.title'
+    @books = Book.paginate(page: params[:page])	
 		@add_btn_name = t 'books.btn_name.add'
 		@show_btn_name = t 'books.btn_name.show'
 		@delete_btn_name = t 'books.btn_name.delete'
+
+		case params[:view]
+		when "m"
+			@page_title = t 'books.title.index'
+			render "index_m", :layout => "application_m"
+		else
+			render :index
+		end
   end
 
   # GET /books/1
   # GET /books/1.json
   def show
+		case params[:view]
+		when "m"
+			@page_title = t 'books.title.detail'
+			render "show_m", :layout => "application_m"
+		else
+			render :show
+		end
   end
 
   # GET /books/new
@@ -23,6 +37,13 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
+		case params[:view]
+		when "m"
+			@page_title = t 'books.title.edit'
+			render "edit_m", :layout => "application_m"
+		else
+			render :edit
+		end
   end
 
   # POST /books
@@ -32,7 +53,14 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to_back(books_path, notice: (t 'alert.success.book_add')) }
+        format.html {	
+					case params[:view]
+					when "m"
+						redirect_to root_path(view: "m"), notice: (t 'alert.success.book_add')
+					else
+						redirect_to_back(books_path, notice: (t 'alert.success.book_add'))
+					end
+				}
         format.json { render :show, status: :created, location: @book }
       else
         format.html { redirect_to_back(books_path, alert: (t 'alert.error.book_add')) }
@@ -44,18 +72,31 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
-		if @book.lending.present?
-			redirect_to edit_book_path, alert: (t 'alert.error.book_update.rented_out')
+		case params[:view]
+		when "m"
+		  respond_to do |format|
+			 	if @book.update(book_params)
+					format.html { redirect_to_back(edit_book_path, notice: (t 'alert.success.book_update')) }
+					format.json { render :edit, status: :ok, location: @book }
+				else
+			  	format.html { redirect_to_back(edit_book_path, alert: (t 'alert.error.book_update.other')) }
+					format.json { render json: @book.errors, status: :unprocessable_entity }
+				end
+			end
 		else
-    	respond_to do |format|
-      	if @book.update(book_params)
-       	 format.html { redirect_to edit_book_path, notice: (t 'alert.success.book_update') }
-        	format.json { render :edit, status: :ok, location: @book }
-      	else
-        	format.html { redirect_to edit_book_path, alert: (t 'alert.error.book_update.other') }
-        	format.json { render json: @book.errors, status: :unprocessable_entity }
-      	end
-    	end
+			if @book.lending.present?
+				redirect_to edit_book_path, alert: (t 'alert.error.book_update.rented_out')
+			else
+		  	respond_to do |format|
+			  	if @book.update(book_params)
+						format.html { redirect_to_back(edit_book_path, notice: (t 'alert.success.book_update')) }
+						format.json { render :edit, status: :ok, location: @book }
+					else
+				  	format.html { redirect_to_back(edit_book_path, alert: (t 'alert.error.book_update.other')) }
+						format.json { render json: @book.errors, status: :unprocessable_entity }
+					end
+				end
+			end
 		end
   end
 
@@ -64,13 +105,33 @@ class BooksController < ApplicationController
   def destroy
     @book.destroy
     respond_to do |format|
-      format.html { redirect_to_back(books_path, notice: (t 'alert.success.book_delete')) }
+      format.html {
+				case params[:view]
+				when "m"
+					redirect_to root_path(view: params[:view]), notice: (t 'alert.success.book_delete')
+				else
+					redirect_to_back(books_path, notice: (t 'alert.success.book_delete'))
+				end
+			}
       format.json { head :no_content }
     end
   end
 
 	def search
-		@search_string = params[:search_string]
+		if params[:search_string].nil?
+			redirect_to root_path(view: params[:view])
+			return	
+		end
+
+		books = Book.arel_table
+		lendings = Lending.arel_table
+
+		@search_string = Book.escape_like(params[:search_string])
+		
+		title_search = books[:title].matches("\%#{@search_string}\%")
+		author_search = books[:author_name].matches("\%#{@search_string}\%")
+		books_sel = title_search.or(author_search)
+
 		@job = case params[:job]
 		when "lending", "return"
 			params[:job]
@@ -87,9 +148,9 @@ class BooksController < ApplicationController
 		when "return"
 			Book.joins(:lending)
 		else
-			Book.all
+			Book.includes(:lending)
 		end
-		@books = @all_books.where("title LIKE ?", "%#{Book.escape_like(params[:search_string])}%").paginate(page: params[:page])
+		@books = @all_books.where(books_sel).paginate(page: params[:page])
 
 		if @all_books.count == 0 || @books.count == 0
 			@result = t 'search.result.nothing', :word => @search_string
@@ -103,11 +164,22 @@ class BooksController < ApplicationController
 			@add_btn_name = t 'books.btn_name.add'
 			@show_btn_name = t 'books.btn_name.show'
 			@delete_btn_name = t 'books.btn_name.delete'
-			render 'books/index' 
+			case params[:view]
+			when "m"
+				render "books/index_m", :layout => "application_m"
+			else
+				render 'books/index' 
+			end
 		else
 			@btn_name = t 'lending.btn_name.' + @job
-			render 'lendings/index'
+			case params[:view]
+			when "m"
+				render "books/index_m", :layout => "application_m"
+			else
+				render 'lendings/index'
+			end
 		end
+
 	end
 
   private

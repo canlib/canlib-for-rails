@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= full_title(yield(:title)) %></title>
+	<%= stylesheet_link_tag 'mobile/application' %>
+	<%= stylesheet_link_tag	'http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css' %>
+  <%= csrf_meta_tags %>
+	<%= render 'layouts/shim' %>
+</head>
+<body>
+	<script type="text/javascript">
+		var I18n = {
+			"end_read_message": "<%= I18n.t 'message.read.end' %>"
+		}
+	</script>
+	<%= javascript_include_tag 'http://code.jquery.com/jquery-1.11.1.min.js' %>
+	<%= javascript_include_tag 'jquery.mobile.config' %>
+	<%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.3/jquery.mobile.min.js' %>
+	<div data-role="page" id="home" data-theme="a">
+		<%= render 'layouts/header_m' %>
+			<% flash.each do |name, msg| %>
+			<div id="flash_message" class=<%= "flash_#{name}" %>>
+				<%=	msg %>
+			</div>
+			<% end %>
+		<%= yield %>
+	</div>
+
+
+	<div data-role="dialog" id="add_book_dialog" data-close-btn="right">
+		<div data-role="header">
+			<%= t 'books.btn_name.add' %>
+		</div>
+
+		<div data-role="content">
+			<p><%= t 'dialog.confirm.book_add' %></p>
+			<%= form_tag(books_path(view: "m"), method: "post", id: "add_book", name: "book_data") do %>
+				<%= label :book, :title, (t 'books.label.title')  %>
+				<%= text_field_tag 'book[title]', "", :maxlength => 50 %>
+				<%= label :book, :author_name, (t 'books.label.author_name') %>
+				<%= text_field_tag 'book[author_name]', "", :maxlength => 30 %>
+				<%= submit_tag (t 'books.btn_name.add'), id: "add_submit_btn", class: "ui-btn ui-shadow ui-corner-all ui-mini", "data-role" => "none" %>
+			<% end %>	
+		</div>
+	</div>
+
+	<% if @book.present? %>
+
+		<div data-role="dialog" id="delete_dialog" data-close-btn="right">
+			<div data-role="header">
+				<%= t 'books.title.edit' %>
+			</div>
+			<div data-role="content">
+				<p><%= t 'dialog.confirm.book_delete' %></p>
+				<dl>
+					<dt class="delete_book_title"><%= t 'books.label.title' %></dt><dd class="selected_book_title confirm"><%= @book.title %></dd>
+					<dt class="delete_book_author"><%= t 'books.label.author_name' %></dt><dd class="selected_book_author confirm"><%= @book.author_name %></dd>
+				</dl>
+				<%= link_to (t 'button.cancel'), "", :class => "cancel-btn", "data-role" => "button", "data-rel" => "back", "data-mini" => "true" %>
+				<%= form_tag(book_path(@book.id, view: "m"), method: "delete", id: "delete_book") do %>
+					<%= submit_tag (t 'books.btn_name.delete'), id: "delete_submit_btn", class: "ui-btn ui-btn-b ui-shadow ui-corner-all ui-mini", "data-role" => "none" %>
+				<% end %>
+			</div>
+		</div>
+
+		<div data-role="dialog" id="update_dialog" data-close-btn="right">
+			<div data-role="header">
+				<%= t 'books.title.edit' %>
+			</div>
+			<div data-role="content">
+				<p><%= t 'dialog.confirm.book_update' %></p>
+				<dl>
+					<dt class="edited_book_title"><%= t 'books.label.title' %></dt>
+					<dd class="edited_book_title"><%= @book.title %></dd>
+					<dt class="edited_book_author"><%= t 'books.label.author_name' %></dt>
+					<dd class="edited_book_author"><%= @book.author_name %></dd>
+				</dl>
+				<%= link_to (t 'button.cancel'), "", :class => "cancel-btn", "data-role" => "button", "data-rel" => "back", "data-mini" => "true" %>
+				<button class="ui-btn ui-mini ui-shadow ui-corner-all" id="update_submit_btn"><%= t 'books.btn_name.update' %></button>
+			</div>
+		</div>
+	
+		<% case @book.lending.present? %>
+		<% when false %>
+			<div data-role="dialog" id="lending_dialog" data-close-btn="right">
+				<div data-role="header">
+					<%= t 'lending.title.lending' %>
+				</div>
+				<div data-role="content">
+					<p><%= t 'dialog.confirm.lending' %></p>
+					<%= form_tag(book_lendings_path(book_id: @book.id, view: "m"), method: "post", id: "lending_book") do %>
+						<%= label :lending, :user_name, (t 'lending.label.user_name') %>
+						<%= text_field_tag 'lending[user_name', "", :maxlength => 25 %>
+						<%= submit_tag (t 'lending.btn_name.lending'), id: "lending_submit_btn", class: "ui-btn ui-shadow ui-corner-all ui-mini", "data-role" => "none" %>
+					<% end %>
+				</div>
+			</div>
+		<% when true %>
+			<div data-role="dialog" id="return_dialog" data-close-btn="right">
+				<div data-role="header">
+					<%= t 'lending.title.return' %>
+				</div>
+				<div data-role="content">
+					<p><%= t 'dialog.confirm.return' %></p>
+					<%= form_tag(book_lending_path(book_id: @book.id, view: "m"), method: "delete", id: "return_book") do %>
+						<dl>
+							<dt class="selected_book_user"><%= t 'lending.label.user_name' %></dt><dd class="confirm"><%= @book.lending.user_name %></dd>
+							<dt class="selected_book_title"><%= t 'books.label.title' %></dt><dd class="confirm"><%= @book.title %></dd>
+							<dt class="selected_book_author"><%= t 'books.label.author_name' %></dt><dd class="confirm"><%= @book.author_name %></dd>
+						</dl>
+						<%= submit_tag (t 'lending.btn_name.return'), id: "return_submit_btn", class: "ui-btn ui-shadow ui-corner-all ui-mini", "data-role" => "none" %>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
+
+	<% end %>
+	<%= javascript_include_tag 'mobile/application' %>
+</body>
+</html>

@@ -27,11 +27,13 @@ en: &en
     title:
       index: Books Information
       detail: Book Detail Information
+      edit: Edit Book Information
     btn_name:
       add: Add
       show: Show and Edit
       delete: Delete
-      edit: Save the changes
+      edit: Edit
+      update: Save the changes
     label:
       title: Title
       author_name: Author Name
@@ -52,8 +54,11 @@ en: &en
       max: .
   message:
     edit_error: You cannot edit the data of this book because this book is rented out.
+    read:
+      end: Tha last page was read. 
+      fail: Reading next page was failed. Please try again.
   search:
-    placeholder: Enter the book title
+    placeholder: Enter the book title or author name
     result:
       hit: '%{hit} book matching "%{word}" of %{all} books is found.'
       hits: '%{hit} books matching "%{word}" of %{all} books are found.'
@@ -80,6 +85,7 @@ en: &en
     ok: OK
     cancel: Cancel
     search: Search
+  pagetop: PAGE TOP
     
 en-US:
   <<: *en
