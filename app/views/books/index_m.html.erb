@@ -20,21 +20,29 @@
 	<ul id="books_index" class="ui-listview" data-role="listview">
 	<% @books.each do |book| %>
 			<% if book.lending.present? %>
-			<a page_num=<%= @books.current_page %> name="each_book_link" href=<%= book_path(id: book.id, view: "m") %> class="ui-btn">
+			<a page_num=<%= @books.current_page %> name="each_book_link" href=<%= book_path(id: book.id, view: "m") %> class="book-link ui-btn">
 			<li book_id=<%= book.id %> lending_id=<%= book.lending.id %> name="book_rented_out" class="ui-li ui-li-static ui-body-c book-list" data-icon="false">
-				<h3 class="book-title ui-li-heading ui-icon-book book-title-icon"><%= book.title %></h3>
-				<p class="book-author ui-li-desc ui-icon-pencil book-author-icon"><%= book.author_name %></p>
-				<p id="book_status_rented_out" class="book-status ui-li-desc"><%= t 'lending.status.rented_out' %></p>
-				<p class="lending-info ui-li-desc ui-icon-user lending-user-icon"><%= book.lending.user_name %></p>
-				<p class="lending-info ui-li-desc ui-icon-clock lending-user-icon"><%= book.lending.date.to_s + " > " + (book.lending.date + book.lending.period).to_s %></p>
+				<h3 class="book-title ui-li-heading"><%= book.title %></h3>
+				<dl>
+				<dt class="book-info"><%= image_tag("icon/pencil.png", :alt => (t 'books.label.author_name'), :title => (t 'books.label.author_name'), :class => "book-author-icon") %></dt>
+				<dd class="book-info book-author ui-li-desc"><%= book.author_name %></dd>
+				<dt class="book-info"><%= image_tag("icon/heart.png", :alt => (t 'books.table_header.status'), :title => (t 'books.table_header.status'), :class => "book-status-icon") %></dt>
+				<dd id="book_status_rented_out" class="book-info book-status ui-li-desc"><%= t 'lending.status.rented_out' %></dd>
+				<dt class="book-info"><%= image_tag("icon/clock-o.png", :alt => (t 'lending.label.limit'), :title => (t 'lending.label.limit'), :class => "lending-limit-icon") %></dt>
+				<dd class="book-info lending-limit ui-li-desc"><%= (book.lending.date + book.lending.period).to_s %></dd>
+				</dl>
 			</li>
 			</a>
 			<% else %>
-			<a page_num=<%= @books.current_page %> name="each_book_link" href=<%= book_path(id: book.id, view: "m") %> class="ui-btn">
+			<a page_num=<%= @books.current_page %> name="each_book_link" href=<%= book_path(id: book.id, view: "m") %> class="book-link ui-btn">
 			<li book_id=<%= book.id %> name="book_kept" class="ui-li ui-li-static ui-body-c book-list">
-				<h3 class="book-title ui-li-heading ui-icon-book book-title-icon"><%= book.title %></h3>
-				<p class="book-author ui-li-desc ui-icon-pencil book-author-icon"><%= book.author_name %></p>
-				<p id="book_status_kept" class="book-status ui-li-desc"><%= t 'lending.status.kept' %></p>
+				<h3 class="book-title ui-li-heading"><%= book.title %></h3>
+				<dl>
+				<dt class="book-info"><%= image_tag("icon/pencil.png", :alt => (t 'books.label.author_name'), :title => (t 'books.label.author_name'), :class => "book-author-icon") %></dt>
+				<dd class="book-info book-author ui-li-desc"><%= book.author_name %></dd>
+				<dt class="book-info"><%= image_tag("icon/heart.png", :alt => (t 'books.table_header.status'), :title => (t 'books.table_header.status'), :class => "book-status-icon") %></dt>
+				<dd id="book_status_kept" class="book-info book-status ui-li-desc"><%= t 'lending.status.kept' %></dd>
+				</dl>
 			</li>
 			</a>
 			<% end %>
