@@ -56,8 +56,8 @@
     <% @books.each do |book| %>
       <tr>
 				<td class="selector"><%= radio_add_params(book) %></td>
-        <td><%= book.title %></td>
-        <td><%= book.author_name %></td>
+        <td class="book_title"><%= book.title %></td>
+        <td class="book_author"><%= book.author_name %></td>
       </tr>
     <% end %>
   </tbody>

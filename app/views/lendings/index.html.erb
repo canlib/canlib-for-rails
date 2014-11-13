@@ -65,8 +65,8 @@
 						<% unless @job == "other" %>
 							<td class="selector"><%= radio_add_params(book) %></td>
 						<% end %>
-						<td><%= book.title %></td>
-						<td><%= book.author_name %></td>
+						<td class="book_title"><%= book.title %></td>
+						<td class="book_author"><%= book.author_name %></td>
 						<% if @job == "other" && book.lending.present? %>
 							<td class="lending"><%= t 'lending.status.rented_out' %></td>
 						<% elsif @job == "other" %>
