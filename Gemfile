@@ -50,6 +50,10 @@ end
 group :test do
 	gem 'selenium-webdriver'
 	gem 'capybara'
+	gem 'poltergeist'
+	gem 'headless'
+	gem 'cucumber-rails', :require => false
+	gem 'database_cleaner'
 	gem 'simplecov'
 end
 
@@ -62,3 +66,4 @@ gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'jquery-turbolinks'
 gem 'jquery-ui-rails'
+gem 'fabrication'
